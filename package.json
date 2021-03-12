@@ -6,13 +6,15 @@
   "author": "Michel dos Santos Kuguio <michel.kuguio@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "dev:server": "ts-node-dev --transpileOnly --ignore-watch node_modules ./src/server.ts"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.0.1",
     "@commitlint/config-conventional": "^12.0.1",
     "@types/node": "^14.14.33",
     "husky": "^5.1.3",
+    "ts-node-dev": "^1.1.6",
     "typescript": "^4.2.3"
   }
 }

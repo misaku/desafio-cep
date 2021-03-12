@@ -4,5 +4,10 @@
   "main": "index.js",
   "repository": "git@github.com:misaku/desafio-cep.git",
   "author": "Michel dos Santos Kuguio <michel.kuguio@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@commitlint/cli": "^12.0.1",
+    "@commitlint/config-conventional": "^12.0.1",
+    "husky": "^5.1.3"
+  }
 }

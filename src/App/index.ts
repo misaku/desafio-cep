@@ -32,7 +32,7 @@ class App extends MainApp {
     const isRouteFile = (fileName:string) => /(routes)\.ts$/.test(fileName.toLowerCase());
 
     // FUNÇÃO DE NAVEGAÇÃO DE PASTAR E VERIFICAÇÃO DE RESPEITO A CONDIÇÃO DO REGEX
-    const getRoutesFilesFromDirname = (dirname:string) => (dir.files(dirname, {sync:true}).filter(isRouteFile));
+    const getRoutesFilesFromDirname = (dirname:string) => ((dir.files(dirname, {sync:true})||[]).filter(isRouteFile));
 
     // AUTO LOAD DE ROTAS
     let Routes: any[] = [];

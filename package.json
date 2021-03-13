@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "dev:server": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules ./src/server.ts",
+    "dev:server": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules src/server.ts",
     "test": "jest"
   },
   "devDependencies": {
@@ -15,8 +15,11 @@
     "@commitlint/config-conventional": "^12.0.1",
     "@release-it/conventional-changelog": "^2.0.1",
     "@types/hapi__hapi": "^20.0.5",
+    "@types/hapi__inert": "^5.2.2",
+    "@types/hapi__vision": "^5.5.2",
     "@types/jest": "^26.0.20",
     "@types/node": "^14.14.33",
+    "@types/node-dir": "^0.0.33",
     "@typescript-eslint/eslint-plugin": "^4.17.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^14.2.1",
@@ -49,6 +52,11 @@
     }
   },
   "dependencies": {
-    "@hapi/hapi": "^20.1.0"
+    "@hapi/hapi": "^20.1.0",
+    "@hapi/inert": "^6.0.3",
+    "@hapi/vision": "^6.0.1",
+    "hapi-auth-jwt2": "^10.2.0",
+    "hapi-swagger": "^14.1.0",
+    "node-dir": "^0.1.17"
   }
 }

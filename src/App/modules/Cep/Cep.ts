@@ -21,4 +21,22 @@ class Cep {
     /** Metodo que retorna somente os numeros */
     return (cep.trim().match(/\d+/g) || []).join('');
   }
+
+  public static possibleNewCep(cep: string) {
+    /** Metodo que troca numero para 0 da esquerda uma vez */
+    const reverseCep = cep.split('').reverse();
+
+    let finded = false;
+
+    const newReverseCep = reverseCep.map(unit => {
+      let newUnit = unit;
+      if (!finded && unit !== '0') {
+        newUnit = '0';
+        finded = true;
+      }
+      return newUnit;
+    });
+
+    return newReverseCep.reverse().join('');
+  }
 }

@@ -2,7 +2,10 @@ import Inert from '@hapi/inert';
 import Vision from '@hapi/vision';
 import HapiSwagger from 'hapi-swagger';
 import * as Hapi from '@hapi/hapi';
-// CONFIRGURAÇÃO DO SWAGGER
+
+/**
+ * Configuração do swagger
+ * */
 export const swaggerConfig = () => {
   const swaggerOptions = {
     info: {
@@ -37,7 +40,9 @@ export const swaggerConfig = () => {
   ];
 };
 
-// CONFIGURAÇÃO DO PLUGIN DE AUTENTICAÇÃO
+/**
+ * Configuração simplificada do plugin de autenticação
+ * */
 export const autenticateConfig = (server: Hapi.Server) => {
   const people = {
     1: {
@@ -45,18 +50,17 @@ export const autenticateConfig = (server: Hapi.Server) => {
       name: 'LuizaLabs',
     },
   };
-  const validate = async (decoded)=>{
+  const validate = async decoded => {
     if (!people[decoded.id]) {
       return { isValid: false };
     }
     return { isValid: true };
   };
-  server.auth.strategy('jwt', 'jwt',
-    {
-      key: 'BuscaCep-LuizaLabs',
-      validate,
-      verifyOptions: { ignoreExpiration: true },
-    });
+  server.auth.strategy('jwt', 'jwt', {
+    key: 'BuscaCep-LuizaLabs',
+    validate,
+    verifyOptions: { ignoreExpiration: true },
+  });
 
   server.auth.default('jwt');
 };

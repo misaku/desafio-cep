@@ -1,20 +1,14 @@
-import * as Hapi from '@hapi/hapi'
+import * as Hapi from '@hapi/hapi';
+import MainAppInterface from './MainApp.interface';
 
-interface ServerProps {
-  preRegisterPlugins():Promise<void>;
-  registerPlugins():Promise<void>;
-  postRegisterPlugins():Promise<void>;
-  preRoutes():Promise<void>;
-  routes():Promise<void>;
-  postRoutes():Promise<void>;
-  init():Promise<void>;
-  start():Promise<void>;
-}
-
-abstract class MainApp implements ServerProps {
+/**
+ * Classe Abstrata MainApp
+ * @class MainApp
+ * */
+abstract class MainApp implements MainAppInterface {
   protected server: Hapi.Server;
-  constructor() {
 
+  constructor() {
     process.on('unhandledRejection', err => {
       console.log(err);
       process.exit(1);
@@ -26,53 +20,74 @@ abstract class MainApp implements ServerProps {
     });
   }
 
-  async preRegisterPlugins() {
-    // ESPAÇO USADO PARA FUTURAS CONFIGURAÇÕES QUE DEVERÃO SER EXECUTADAS ANTES DE UM REGISTRO
-    // DE UM PLUGIN
-  }
+  /**
+   * Metodo de Executado antes do Registro de Plugins
+   * @type {function():Promise<void>}
+   * @return {Promise<void>}
+   * @public
+   */
+  public async preRegisterPlugins() {}
 
-  async registerPlugins() {
-    // ESPAÇO PARA COLOCAR OS REGISTROS DE PLUGINS
-  }
+  /**
+   * Metodo de Registro de Plugins
+   * @type {function():Promise<void>}
+   * @return {Promise<void>}
+   * @public
+   */
+  public async registerPlugins() {}
 
-  async postRegisterPlugins() {
-    // ESPAÇO USADO PARA FUTURAS CONFIGURAÇÕES POS REGISTRO DE PLUGINS
-  }
+  /**
+   * Metodo Executado depois do Registro de Plugins
+   * @type {function():Promise<void>}
+   * @return {Promise<void>}
+   * @public
+   */
+  public async postRegisterPlugins() {}
 
-  async preRoutes() {
-    // ESPAÇO USADO PARA FUTURAS CONFIGURAÇÕES ANTES DO REGISTRO DAS ROTAS
-  }
+  /**
+   * Metodo de Executado antes do Registro de Rotas
+   * @type {function():Promise<void>}
+   * @return {Promise<void>}
+   * @public
+   */
+  public async preRoutes() {}
 
-  async routes() {
-    // ESPAÇO USADO PARA REGISTRAR ROTAS
-  }
+  /**
+   * Metodo de Registro de Rotas
+   * @type {function():Promise<void>}
+   * @return {Promise<void>}
+   * @public
+   */
+  public async routes() {}
 
-  async postRoutes() {
-    // ESPAÇO USADO PARA FUTURAS CONFIGURAÇÕES POS REGISTRO DE ROTAS
-  }
+  /**
+   * Metodo de Executado depois do Registro de Rotas
+   * @type {function():Promise<void>}
+   * @return {Promise<void>}
+   * @public
+   */
+  public async postRoutes() {}
 
-  // METODO USADO PARA INICIALIZAR O SISTEMA SEM ALOAÇÃO DE UMA PORTA, GERALMENTE SERÁ USADO
-  // PARA FAZER TESTES NA APALIAÇÃO
-  async init() {
+  /**
+   * Metodo de Inicialização do serviço
+   * @type {function(?boolean):Promise<void>}
+   * @param {boolean} onlyInitialize - Quando verdadeiro serviço inicia sem porta, gerelamente usado para testes.
+   * @return {Promise<void>}
+   * @public
+   */
+  public async start(onlyInitialize = false) {
     await this.preRegisterPlugins();
     await this.registerPlugins();
     await this.postRegisterPlugins();
     await this.preRoutes();
     await this.routes();
     await this.postRoutes();
-    await this.server.initialize();
-  }
-
-// START DO SERVER
-  async start() {
-    await this.preRegisterPlugins();
-    await this.registerPlugins();
-    await this.postRegisterPlugins();
-    await this.preRoutes();
-    await this.routes();
-    await this.postRoutes();
-    await this.server.start();
-    console.log('MainApp running on %s', this.server.info.uri);
+    if (onlyInitialize) {
+      await this.server.initialize();
+    } else {
+      await this.server.start();
+      console.log('MainApp running on %s', this.server.info.uri);
+    }
   }
 }
 

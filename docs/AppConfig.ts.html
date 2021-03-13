@@ -7,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> MainApp.ts</title>
+  <title> AppConfig.ts</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -76,7 +76,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Source</p>
-                    <h1>MainApp.ts</h1>
+                    <h1>AppConfig.ts</h1>
                 </header>
                 
 
@@ -85,100 +85,72 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import * as Hapi from '@hapi/hapi';
-import MainAppInterface from './MainApp.interface';
+            <pre class="prettyprint source linenums"><code>import Inert from '@hapi/inert';
+import Vision from '@hapi/vision';
+import HapiSwagger from 'hapi-swagger';
+import * as Hapi from '@hapi/hapi';
 
 /**
- * Classe Abstrata MainApp
- * @class MainApp
+ * Configuração do swagger
  * */
-abstract class MainApp implements MainAppInterface {
-  protected server: Hapi.Server;
+export const swaggerConfig = () => {
+  const swaggerOptions = {
+    info: {
+      title: 'Busca CEP API',
+      description: 'Busca CEP é uma api responsavel para buscar cep',
+      version: '1.0.0',
+    },
+    securityDefinitions: {
+      jwt: {
+        type: 'apiKey',
+        name: 'Authorization',
+        in: 'header',
+      },
+    },
+    documentationPath: '/doc',
+    grouping: 'tags',
+    tags: [
+      {
+        name: 'BUSCA',
+        description: 'Rotas responsavei para busca de cep',
+      },
+    ],
+    security: [{ jwt: [] }],
+  };
+  return [
+    Inert,
+    Vision,
+    {
+      plugin: HapiSwagger,
+      options: swaggerOptions,
+    },
+  ];
+};
 
-  constructor() {
-    process.on('unhandledRejection', err => {
-      console.log(err);
-      process.exit(1);
-    });
-
-    this.server = Hapi.server({
-      port: 3000,
-      host: 'localhost',
-    });
-  }
-
-  /**
-   * Metodo de Executado antes do Registro de Plugins
-   * @type {function():Promise&lt;void>}
-   * @return {Promise&lt;void>}
-   * @public
-   */
-  public async preRegisterPlugins() {}
-
-  /**
-   * Metodo de Registro de Plugins
-   * @type {function():Promise&lt;void>}
-   * @return {Promise&lt;void>}
-   * @public
-   */
-  public async registerPlugins() {}
-
-  /**
-   * Metodo Executado depois do Registro de Plugins
-   * @type {function():Promise&lt;void>}
-   * @return {Promise&lt;void>}
-   * @public
-   */
-  public async postRegisterPlugins() {}
-
-  /**
-   * Metodo de Executado antes do Registro de Rotas
-   * @type {function():Promise&lt;void>}
-   * @return {Promise&lt;void>}
-   * @public
-   */
-  public async preRoutes() {}
-
-  /**
-   * Metodo de Registro de Rotas
-   * @type {function():Promise&lt;void>}
-   * @return {Promise&lt;void>}
-   * @public
-   */
-  public async routes() {}
-
-  /**
-   * Metodo de Executado depois do Registro de Rotas
-   * @type {function():Promise&lt;void>}
-   * @return {Promise&lt;void>}
-   * @public
-   */
-  public async postRoutes() {}
-
-  /**
-   * Metodo de Inicialização do serviço
-   * @type {function(?boolean):Promise&lt;void>}
-   * @param {boolean} onlyInitialize - Quando verdadeiro serviço inicia sem porta, gerelamente usado para testes.
-   * @return {Promise&lt;void>}
-   * @public
-   */
-  public async start(onlyInitialize = false) {
-    await this.preRegisterPlugins();
-    await this.registerPlugins();
-    await this.postRegisterPlugins();
-    await this.preRoutes();
-    await this.routes();
-    await this.postRoutes();
-    if (onlyInitialize) {
-      await this.server.initialize();
-    } else {
-      await this.server.start();
-      console.log('MainApp running on %s', this.server.info.uri);
+/**
+ * Configuração simplificada do plugin de autenticação
+ * */
+export const autenticateConfig = (server: Hapi.Server) => {
+  const people = {
+    1: {
+      id: 1,
+      name: 'LuizaLabs',
+    },
+  };
+  const validate = async decoded => {
+    if (!people[decoded.id]) {
+      return { isValid: false };
     }
-  }
-}
+    return { isValid: true };
+  };
+  server.auth.strategy('jwt', 'jwt', {
+    key: 'BuscaCep-LuizaLabs',
+    validate,
+    verifyOptions: { ignoreExpiration: true },
+  });
 
-export default MainApp;
+  server.auth.default('jwt');
+};
 </code></pre>
         </article>
     </section>

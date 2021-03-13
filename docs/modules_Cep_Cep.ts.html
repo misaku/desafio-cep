@@ -7,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> MainApp.ts</title>
+  <title> modules/Cep/Cep.ts</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -76,7 +76,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Source</p>
-                    <h1>MainApp.ts</h1>
+                    <h1>modules/Cep/Cep.ts</h1>
                 </header>
                 
 
@@ -85,100 +85,63 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import * as Hapi from '@hapi/hapi';
-import MainAppInterface from './MainApp.interface';
-
-/**
- * Classe Abstrata MainApp
- * @class MainApp
+            <pre class="prettyprint source linenums"><code>/** @class Cep
+ * @description Classe responsavel para tratar CEP
  * */
-abstract class MainApp implements MainAppInterface {
-  protected server: Hapi.Server;
+class Cep {
+  /**
+   * Regex para validação de cep
+   * esse regex garante
+   * que comece e termine com numero `^`inicio `$`fim
+   * que seja no formato em 00?000?000 no qual as `?` representa um separador que pode ou não existir,
+   * no primeiro separador somente pode `.` ja no segundo separador alem do ponto pde `-` e espaço
+   * com isso consigo garantir a validação dos seguintes formatos
+   * `00.000.000`, `00.000-000`, `00.000 000`, `00000.000`, `00000-000`, `00000 000`, `00000000`
+   * @type {function(string):boolean}
+   * @param {string} cep - valor do cep.
+   * @return {boolean}
+   * @public
+   */
+  public static isValid(cep: string) {
+    const format = /^[0-9]{2}?(\.?)[0-9]{3}?((-|.|\s)?)[0-9]{3}$/g;
 
-  constructor() {
-    process.on('unhandledRejection', err => {
-      console.log(err);
-      process.exit(1);
-    });
-
-    this.server = Hapi.server({
-      port: 3000,
-      host: 'localhost',
-    });
+    return format.test(cep.trim());
   }
 
-  /**
-   * Metodo de Executado antes do Registro de Plugins
-   * @type {function():Promise&lt;void>}
-   * @return {Promise&lt;void>}
+  /** Metodo que retorna somente os numeros
+   * @type {function(string):string}
+   * @param {string} cep - valor do cep.
+   * @return {string}
    * @public
-   */
-  public async preRegisterPlugins() {}
+   * */
 
-  /**
-   * Metodo de Registro de Plugins
-   * @type {function():Promise&lt;void>}
-   * @return {Promise&lt;void>}
-   * @public
-   */
-  public async registerPlugins() {}
+  public static clearedValue(cep: string) {
+    return (cep.trim().match(/\d+/g) || []).join('');
+  }
 
-  /**
-   * Metodo Executado depois do Registro de Plugins
-   * @type {function():Promise&lt;void>}
-   * @return {Promise&lt;void>}
+  /** Metodo que troca numero para 0 da esquerda uma vez
+   * @type {function(string):string}
+   * @param {string} cep - valor do cep.
+   * @return {string}
    * @public
-   */
-  public async postRegisterPlugins() {}
+   * */
+  public static possibleNewCep(cep: string) {
+    const reverseCep = cep.split('').reverse();
 
-  /**
-   * Metodo de Executado antes do Registro de Rotas
-   * @type {function():Promise&lt;void>}
-   * @return {Promise&lt;void>}
-   * @public
-   */
-  public async preRoutes() {}
+    let finded = false;
 
-  /**
-   * Metodo de Registro de Rotas
-   * @type {function():Promise&lt;void>}
-   * @return {Promise&lt;void>}
-   * @public
-   */
-  public async routes() {}
+    const newReverseCep = reverseCep.map(unit => {
+      let newUnit = unit;
+      if (!finded &amp;&amp; unit !== '0') {
+        newUnit = '0';
+        finded = true;
+      }
+      return newUnit;
+    });
 
-  /**
-   * Metodo de Executado depois do Registro de Rotas
-   * @type {function():Promise&lt;void>}
-   * @return {Promise&lt;void>}
-   * @public
-   */
-  public async postRoutes() {}
-
-  /**
-   * Metodo de Inicialização do serviço
-   * @type {function(?boolean):Promise&lt;void>}
-   * @param {boolean} onlyInitialize - Quando verdadeiro serviço inicia sem porta, gerelamente usado para testes.
-   * @return {Promise&lt;void>}
-   * @public
-   */
-  public async start(onlyInitialize = false) {
-    await this.preRegisterPlugins();
-    await this.registerPlugins();
-    await this.postRegisterPlugins();
-    await this.preRoutes();
-    await this.routes();
-    await this.postRoutes();
-    if (onlyInitialize) {
-      await this.server.initialize();
-    } else {
-      await this.server.start();
-      console.log('MainApp running on %s', this.server.info.uri);
-    }
+    return newReverseCep.reverse().join('');
   }
 }
-
-export default MainApp;
 </code></pre>
         </article>
     </section>

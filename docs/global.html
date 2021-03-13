@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +5,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> MainApp.ts</title>
+  <title> Global</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -75,113 +73,249 @@
         <div class="core" id="main-content-wrapper">
             <div class="content">
                 <header class="page-title">
-                    <p>Source</p>
-                    <h1>MainApp.ts</h1>
+                    <p>Title</p>
+                    <h1>Global</h1>
                 </header>
                 
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>import * as Hapi from '@hapi/hapi';
-import MainAppInterface from './MainApp.interface';
+        <h2></h2>
+        
+    
+</header>
 
-/**
- * Classe Abstrata MainApp
- * @class MainApp
- * */
-abstract class MainApp implements MainAppInterface {
-  protected server: Hapi.Server;
+<article>
+    <div class="container-overview">
+    
+        
 
-  constructor() {
-    process.on('unhandledRejection', err => {
-      console.log(err);
-      process.exit(1);
-    });
+        
 
-    this.server = Hapi.server({
-      port: 3000,
-      host: 'localhost',
-    });
-  }
 
-  /**
-   * Metodo de Executado antes do Registro de Plugins
-   * @type {function():Promise&lt;void>}
-   * @return {Promise&lt;void>}
-   * @public
-   */
-  public async preRegisterPlugins() {}
+<dl class="details">
 
-  /**
-   * Metodo de Registro de Plugins
-   * @type {function():Promise&lt;void>}
-   * @return {Promise&lt;void>}
-   * @public
-   */
-  public async registerPlugins() {}
+    
 
-  /**
-   * Metodo Executado depois do Registro de Plugins
-   * @type {function():Promise&lt;void>}
-   * @return {Promise&lt;void>}
-   * @public
-   */
-  public async postRegisterPlugins() {}
+    
 
-  /**
-   * Metodo de Executado antes do Registro de Rotas
-   * @type {function():Promise&lt;void>}
-   * @return {Promise&lt;void>}
-   * @public
-   */
-  public async preRoutes() {}
+    
 
-  /**
-   * Metodo de Registro de Rotas
-   * @type {function():Promise&lt;void>}
-   * @return {Promise&lt;void>}
-   * @public
-   */
-  public async routes() {}
+    
 
-  /**
-   * Metodo de Executado depois do Registro de Rotas
-   * @type {function():Promise&lt;void>}
-   * @return {Promise&lt;void>}
-   * @public
-   */
-  public async postRoutes() {}
+    
 
-  /**
-   * Metodo de Inicialização do serviço
-   * @type {function(?boolean):Promise&lt;void>}
-   * @param {boolean} onlyInitialize - Quando verdadeiro serviço inicia sem porta, gerelamente usado para testes.
-   * @return {Promise&lt;void>}
-   * @public
-   */
-  public async start(onlyInitialize = false) {
-    await this.preRegisterPlugins();
-    await this.registerPlugins();
-    await this.postRegisterPlugins();
-    await this.preRoutes();
-    await this.routes();
-    await this.postRoutes();
-    if (onlyInitialize) {
-      await this.server.initialize();
-    } else {
-      await this.server.start();
-      console.log('MainApp running on %s', this.server.info.uri);
-    }
-  }
-}
+    
 
-export default MainApp;
-</code></pre>
-        </article>
-    </section>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class='vertical-section'>
+            <h1>Members</h1>
+            <div class="members">
+            
+                <div class="member">
+
+<h4 class="name" id="autenticateConfig">
+    <a class="href-link" href="#autenticateConfig">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        autenticateConfig
+    </span>
+    
+</h4>
+
+
+<p class="summary"><p>Configuração simplificada do plugin de autenticação</p>.</p>
+
+
+
+<div class="description">
+    <p>Configuração simplificada do plugin de autenticação</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="AppConfig.ts.html" class="button">View Source</a>
+            <span>
+                <a href="AppConfig.ts.html">AppConfig.ts</a>, <a href="AppConfig.ts.html#line44">line 44</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+<h4 class="name" id="swaggerConfig">
+    <a class="href-link" href="#swaggerConfig">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        swaggerConfig
+    </span>
+    
+</h4>
+
+
+<p class="summary"><p>Configuração do swagger</p>.</p>
+
+
+
+<div class="description">
+    <p>Configuração do swagger</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="AppConfig.ts.html" class="button">View Source</a>
+            <span>
+                <a href="AppConfig.ts.html">AppConfig.ts</a>, <a href="AppConfig.ts.html#line8">line 8</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+            </div>
+        </div>
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

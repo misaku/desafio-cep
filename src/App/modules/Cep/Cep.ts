@@ -1,14 +1,8 @@
+/** @class Cep
+ * @description Classe responsavel para tratar CEP
+ * */
 class Cep {
-  private startValue: string;
-
-  private value: string;
-
-  constructor(value: string) {
-    this.startValue = value;
-    this.value = value;
-  }
-
-  public isValid() {
+  public static isValid(cep: string) {
     /**
      * Regex para validação de cep
      * esse regex garante
@@ -20,6 +14,11 @@ class Cep {
      */
     const format = /^[0-9]{2}?(\.?)[0-9]{3}?((-|.|\s)?)[0-9]{3}$/g;
 
-    return format.test(this.startValue.trim());
+    return format.test(cep.trim());
+  }
+
+  public static clearedValue(cep: string) {
+    /** Metodo que retorna somente os numeros */
+    return (cep.trim().match(/\d+/g) || []).join('');
   }
 }

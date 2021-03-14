@@ -1,5 +1,5 @@
 import Cep from './Cep';
-import CepServices from './Cep.services';
+import CepServices, { ResponseDTO } from './Cep.services';
 
 class CepBusiness {
   protected service: CepServices;
@@ -15,8 +15,8 @@ class CepBusiness {
       while (!stopGetAddres) {
         if (cep !== '00000000') {
           // eslint-disable-next-line no-await-in-loop
-          const { success, response } = await this.service.getAddress(cep);
-          if (success && !response.erro) {
+          const response = await this.service.getAddress(cep);
+          if (response.success) {
             stopGetAddres = true;
             return response;
           }
@@ -24,13 +24,19 @@ class CepBusiness {
         } else {
           stopGetAddres = true;
           return {
-            erro: 'Não foi possivel encontrar um resultado',
+            success: false,
+            data: {
+              erro: 'Não foi possivel encontrar um resultado',
+            },
           };
         }
       }
     }
     return {
-      erro: 'Cep Inaválido',
+      success: false,
+      data: {
+        erro: 'Cep Inaválido',
+      },
     };
   }
 
@@ -38,20 +44,25 @@ class CepBusiness {
     if (Cep.isValid(cepValue)) {
       const cep = Cep.clearedValue(cepValue);
       if (cep !== '00000000') {
-        // eslint-disable-next-line prefer-const
-        let { success, response } = await this.service.getAddress(cep);
-        if (success && !response.erro) {
+        let response = await this.service.getAddress(cep);
+        if (response.success) {
           return response;
         }
-        response = await this.getAddress2(Cep.possibleNewCep(cep));
+        response = (await this.getAddress2(Cep.possibleNewCep(cep))) as ResponseDTO;
         return response;
       }
       return {
-        erro: 'Não foi possivel encontrar um resultado',
+        success: false,
+        data: {
+          erro: 'Não foi possivel encontrar um resultado',
+        },
       };
     }
     return {
-      erro: 'Cep Inaválido',
+      success: false,
+      data: {
+        erro: 'Cep Inaválido',
+      },
     };
   }
 }

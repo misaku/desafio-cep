@@ -1,3 +1,4 @@
+import { ResponseToolkit, Request } from '@hapi/hapi';
 import CepBusiness from './Cep.business';
 
 class CepController {
@@ -7,14 +8,14 @@ class CepController {
     this.cepBusiness = cepBusiness;
   }
 
-  public async show({ params: { cepValue } }) {
+  public async show({ params: { cepValue } }: Request, h: ResponseToolkit) {
     const response = await this.cepBusiness.getAddress(cepValue);
-    return response;
+    return h.response(response.data).code(response.success ? 200 : 400);
   }
 
-  public async show2({ params: { cepValue } }) {
+  public async show2({ params: { cepValue } }: Request, h: ResponseToolkit) {
     const response = await this.cepBusiness.getAddress2(cepValue);
-    return response;
+    return h.response(response.data).code(response.success ? 200 : 400);
   }
 }
 

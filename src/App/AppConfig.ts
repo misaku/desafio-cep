@@ -22,12 +22,6 @@ export const swaggerConfig = () => {
     },
     documentationPath: '/doc',
     grouping: 'tags',
-    tags: [
-      {
-        name: 'BUSCA',
-        description: 'Rotas responsavei para busca de cep',
-      },
-    ],
     security: [{ jwt: [] }],
   };
   return [

@@ -40,19 +40,27 @@ export const swaggerConfig = () => {
  * Configuração simplificada do plugin de autenticação
  * */
 export const autenticateConfig = (server: Hapi.Server) => {
-  const userReposirory = getRepository(User);
-  const validate = async (decoded: { email: any; id: any }) => {
-    const user = userReposirory.findOne({
-      where: {
-        email: decoded.email,
-        id: decoded.id,
-      },
-    });
-    if (!user) {
-      return { isValid: false };
-    }
-    return { isValid: true };
+  let validate = async decoded => {
+    return { isValid: false };
   };
+  try {
+    const userReposirory = getRepository(User);
+    validate = async (decoded: { email: any; id: any }) => {
+      const user = userReposirory.findOne({
+        where: {
+          email: decoded.email,
+          id: decoded.id,
+        },
+      });
+      if (!user) {
+        return { isValid: false };
+      }
+      return { isValid: true };
+    };
+  } catch (e) {
+    console.error('banco de dados indisponivel');
+  }
+
   server.auth.strategy('jwt', 'jwt', {
     key: 'BuscaCep-LuizaLabs',
     validate,

@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
 @Entity('users')
 export default class User {
@@ -14,9 +14,9 @@ export default class User {
   @Column()
   public password: string;
 
-  @Column('time with time zone')
+  @CreateDateColumn({ name: 'created_at' })
   public createdAt: Date;
 
-  @Column('time with time zone')
+  @UpdateDateColumn({ name: 'updated_at' })
   public updatedAt: Date;
 }

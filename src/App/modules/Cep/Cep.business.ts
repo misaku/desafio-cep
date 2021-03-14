@@ -1,5 +1,6 @@
 import Cep from './Cep';
 import CepServices, { ResponseDTO } from './Cep.services';
+import AppError from '../../../errors/AppError';
 
 class CepBusiness {
   protected service: CepServices;
@@ -23,21 +24,11 @@ class CepBusiness {
           cep = Cep.possibleNewCep(cep);
         } else {
           stopGetAddres = true;
-          return {
-            success: false,
-            data: {
-              erro: 'Não foi possivel encontrar um resultado',
-            },
-          };
+          throw new AppError('Não foi possivel encontrar um resultado');
         }
       }
     }
-    return {
-      success: false,
-      data: {
-        erro: 'Cep Inaválido',
-      },
-    };
+    throw new AppError('Cep Inaválido');
   }
 
   public async getAddress2(cepValue: string) {
@@ -51,19 +42,9 @@ class CepBusiness {
         response = (await this.getAddress2(Cep.possibleNewCep(cep))) as ResponseDTO;
         return response;
       }
-      return {
-        success: false,
-        data: {
-          erro: 'Não foi possivel encontrar um resultado',
-        },
-      };
+      throw new AppError('Não foi possivel encontrar um resultado');
     }
-    return {
-      success: false,
-      data: {
-        erro: 'Cep Inaválido',
-      },
-    };
+    throw new AppError('Cep Inaválido');
   }
 }
 export default CepBusiness;

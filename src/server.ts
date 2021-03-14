@@ -1,6 +1,8 @@
 import 'reflect-metadata';
-import './DataBase';
+import DataBase from './DataBase';
 import App from './App';
 
-const server = new App();
-server.start();
+DataBase(() => {
+  const server = new App();
+  server.start();
+});

@@ -9,13 +9,11 @@ class CepController {
   }
 
   public async show({ params: { cepValue } }: Request, h: ResponseToolkit) {
-    const response = await this.cepBusiness.getAddress(cepValue);
-    return h.response(response.data).code(response.success ? 200 : 400);
+    return this.cepBusiness.getAddress(cepValue);
   }
 
   public async show2({ params: { cepValue } }: Request, h: ResponseToolkit) {
-    const response = await this.cepBusiness.getAddress2(cepValue);
-    return h.response(response.data).code(response.success ? 200 : 400);
+    return this.cepBusiness.getAddress2(cepValue);
   }
 }
 

@@ -7,7 +7,7 @@ class UserController {
     this.userBusiness = helthBusiness;
   }
 
-  public async store({ payload }, h) {
+  public async store({ payload }) {
     return this.userBusiness.createUser(payload);
   }
 }

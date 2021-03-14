@@ -1,6 +1,7 @@
 import Cep from './Cep';
-import CepServices, { ResponseDTO } from './Cep.services';
+import CepServices from './Cep.services';
 import AppError from '../../../errors/AppError';
+import { ResponseDTO } from './Cep.interfaces';
 
 class CepBusiness {
   protected service: CepServices;
@@ -19,7 +20,7 @@ class CepBusiness {
           const response = await this.service.getAddress(cep);
           if (response.success) {
             stopGetAddres = true;
-            return response;
+            return response.data;
           }
           cep = Cep.possibleNewCep(cep);
         } else {
@@ -37,7 +38,7 @@ class CepBusiness {
       if (cep !== '00000000') {
         let response = await this.service.getAddress(cep);
         if (response.success) {
-          return response;
+          return response.data;
         }
         response = (await this.getAddress2(Cep.possibleNewCep(cep))) as ResponseDTO;
         return response;

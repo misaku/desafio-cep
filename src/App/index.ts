@@ -3,12 +3,14 @@ import * as dir from 'node-dir';
 import hapiAuthJWT from 'hapi-auth-jwt2';
 import MainApp from './MainApp';
 import { autenticateConfig, swaggerConfig } from './AppConfig';
+import ExceptionHandlerExtension from '../errors/ExceptionHandlerExtension';
 
 class App extends MainApp {
   async registerPlugins() {
     await super.registerPlugins();
 
     await this.server.register([hapiAuthJWT, ...(swaggerConfig() as any)]);
+    ExceptionHandlerExtension(this.server);
   }
 
   async postRegisterPlugins() {

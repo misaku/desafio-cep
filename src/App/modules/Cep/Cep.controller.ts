@@ -5,11 +5,15 @@ class CepController {
 
   constructor(cepBusiness: CepBusiness) {
     this.cepBusiness = cepBusiness;
-    console.log(this.cepBusiness, 'INICIOU');
   }
 
   public async show({ params: { cepValue } }) {
     const response = await this.cepBusiness.getAddress(cepValue);
+    return response;
+  }
+
+  public async show2({ params: { cepValue } }) {
+    const response = await this.cepBusiness.getAddress2(cepValue);
     return response;
   }
 }

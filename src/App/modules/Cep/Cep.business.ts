@@ -1,36 +1,58 @@
-import axios from 'axios';
 import Cep from './Cep';
+import CepServices from './Cep.services';
 
 class CepBusiness {
-  public async getAddress(cepValue) {
-    if (!Cep.isValid(cepValue)) {
-      throw new Error('Cep Inaválido');
-    }
-    let cep = Cep.clearedValue(cepValue);
-    let stopGetAddres = false;
-    while (!stopGetAddres) {
-      if (cep !== '00000000') {
-        try {
-          const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/unicode/`);
-          if (response.status === 200) {
-            if (!response.data.erro) {
-              stopGetAddres = true;
-              return response.data;
-            }
-            cep = Cep.possibleNewCep(cep);
+  protected service: CepServices;
+
+  constructor() {
+    this.service = new CepServices();
+  }
+
+  public async getAddress(cepValue: string) {
+    if (Cep.isValid(cepValue)) {
+      let cep = Cep.clearedValue(cepValue);
+      let stopGetAddres = false;
+      while (!stopGetAddres) {
+        if (cep !== '00000000') {
+          // eslint-disable-next-line no-await-in-loop
+          const { success, response } = await this.service.getAddress(cep);
+          if (success && !response.erro) {
+            stopGetAddres = true;
+            return response;
           }
-        } catch (e) {
+          cep = Cep.possibleNewCep(cep);
+        } else {
+          stopGetAddres = true;
           return {
-            erro: 'Houve um erro na requisição tente novamente mais tarde!',
+            erro: 'Não foi possivel encontrar um resultado',
           };
         }
-      } else {
-        stopGetAddres = true;
-        return {
-          erro: 'Não foi possivel encontrar um resultado',
-        };
       }
     }
+    return {
+      erro: 'Cep Inaválido',
+    };
+  }
+
+  public async getAddress2(cepValue: string) {
+    if (Cep.isValid(cepValue)) {
+      const cep = Cep.clearedValue(cepValue);
+      if (cep !== '00000000') {
+        // eslint-disable-next-line prefer-const
+        let { success, response } = await this.service.getAddress(cep);
+        if (success && !response.erro) {
+          return response;
+        }
+        response = await this.getAddress2(Cep.possibleNewCep(cep));
+        return response;
+      }
+      return {
+        erro: 'Não foi possivel encontrar um resultado',
+      };
+    }
+    return {
+      erro: 'Cep Inaválido',
+    };
   }
 }
 export default CepBusiness;

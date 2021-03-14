@@ -21,5 +21,19 @@ export default (server: Hapi.Server) => {
         validate: CepSchema.show(),
       },
     },
+    {
+      method: 'GET',
+      path: '/cep2/{cepValue}',
+      options: {
+        auth: {
+          mode: 'optional',
+        },
+        handler: controller.show2,
+        description: 'Find',
+        notes: 'Retora endereço do CEP',
+        tags: ['api', 'CEP'], // ADD THIS TAG
+        validate: CepSchema.show(),
+      },
+    },
   ]);
 };

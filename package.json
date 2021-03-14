@@ -8,6 +8,7 @@
     "scripts": {
         "build": "tsc",
         "dev:server": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules src/server.ts",
+        "typeorm": "ts-node-dev --transpile-only ./node_modules/typeorm/cli.js",
         "docs": "jsdoc -c jsdoc.json",
         "test": "jest"
     },
@@ -69,6 +70,9 @@
         "hapi-auth-jwt2": "^10.2.0",
         "hapi-swagger": "^14.1.0",
         "joi": "^17.4.0",
-        "node-dir": "^0.1.17"
+        "node-dir": "^0.1.17",
+        "pg": "^8.5.1",
+        "reflect-metadata": "^0.1.13",
+        "typeorm": "^0.2.31"
     }
 }

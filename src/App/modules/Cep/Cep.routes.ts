@@ -12,7 +12,7 @@ export default (server: Hapi.Server) => {
       path: '/cep/{cepValue}',
       options: {
         auth: {
-          mode: 'optional',
+          mode: 'required',
         },
         handler: controller.show,
         description: 'Find',
@@ -26,7 +26,7 @@ export default (server: Hapi.Server) => {
       path: '/cep2/{cepValue}',
       options: {
         auth: {
-          mode: 'optional',
+          mode: 'required',
         },
         handler: controller.show2,
         description: 'Find',

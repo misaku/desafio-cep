@@ -1,6 +1,6 @@
 import { getConnection } from 'typeorm';
 
-class HelthBusiness {
+class HealthBusiness {
   public async getHelth() {
     let database: string;
     try {
@@ -20,4 +20,4 @@ class HelthBusiness {
     };
   }
 }
-export default HelthBusiness;
+export default HealthBusiness;

@@ -2,11 +2,7 @@ import { ResponseToolkit, Request } from '@hapi/hapi';
 import CepBusiness from './Cep.business';
 
 class CepController {
-  protected cepBusiness: CepBusiness;
-
-  constructor(cepBusiness: CepBusiness) {
-    this.cepBusiness = cepBusiness;
-  }
+  constructor(private cepBusiness: CepBusiness) {}
 
   public async show({ params: { cepValue } }: Request, h: ResponseToolkit) {
     return this.cepBusiness.getAddress(cepValue);

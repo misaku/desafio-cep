@@ -2,9 +2,10 @@ import * as Hapi from '@hapi/hapi';
 import CepSchema from './Cep.schema';
 import CepController from './Cep.controller';
 import CepBusiness from './Cep.business';
+import CepServices from './Cep.services';
 
 export default (server: Hapi.Server) => {
-  const controller = new CepController(new CepBusiness());
+  const controller = new CepController(new CepBusiness(new CepServices()));
   server.bind(controller);
   server.route([
     {

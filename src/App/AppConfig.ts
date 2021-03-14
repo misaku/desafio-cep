@@ -2,8 +2,8 @@ import Inert from '@hapi/inert';
 import Vision from '@hapi/vision';
 import HapiSwagger from 'hapi-swagger';
 import * as Hapi from '@hapi/hapi';
-import { getRepository } from 'typeorm';
-import User from '../DataBase/entity/User';
+import { getCustomRepository } from 'typeorm';
+import UserRepository from './modules/User/User.repository';
 
 /**
  * Configuração do swagger
@@ -44,14 +44,9 @@ export const autenticateConfig = (server: Hapi.Server) => {
     return { isValid: false };
   };
   try {
-    const userReposirory = getRepository(User);
+    const userReposirory = new UserRepository();
     validate = async (decoded: { email: any; id: any }) => {
-      const user = userReposirory.findOne({
-        where: {
-          email: decoded.email,
-          id: decoded.id,
-        },
-      });
+      const user = userReposirory.findByIdAndEmail(decoded.id, decoded.email);
       if (!user) {
         return { isValid: false };
       }

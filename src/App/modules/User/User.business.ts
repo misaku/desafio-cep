@@ -1,20 +1,14 @@
-import { getRepository } from 'typeorm';
 import { hash } from 'bcryptjs';
 import User from '../../../DataBase/entity/User';
 import AppError from '../../../errors/AppError';
 
-interface RequestUserDto {
-  name: string;
-  email: string;
-  password: string;
-}
-class UserBusiness {
-  public async createUser({ email, name, password }: RequestUserDto): Promise<User> {
-    const userRepository = getRepository(User);
+import { IRequestUserDto, IUserRepository } from './User.interfaces';
 
-    const checkUserExist = await userRepository.findOne({
-      where: { email },
-    });
+class UserBusiness {
+  constructor(private userRepository: IUserRepository) {}
+
+  public async createUser({ email, name, password }: IRequestUserDto): Promise<User> {
+    const checkUserExist = await this.userRepository.findByEmail(email);
 
     if (checkUserExist) {
       throw new AppError('E-mail já existe em nossa base');
@@ -22,9 +16,7 @@ class UserBusiness {
 
     const hashedPassword = await hash(password, 8);
 
-    const user = userRepository.create({ email, name, password: hashedPassword });
-
-    await userRepository.save(user);
+    const user = await this.userRepository.create({ email, name, password: hashedPassword });
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore

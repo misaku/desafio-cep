@@ -4,11 +4,7 @@ import AppError from '../../../errors/AppError';
 import { ResponseDTO } from './Cep.interfaces';
 
 class CepBusiness {
-  protected service: CepServices;
-
-  constructor() {
-    this.service = new CepServices();
-  }
+  constructor(private service: CepServices) {}
 
   public async getAddress(cepValue: string) {
     if (Cep.isValid(cepValue)) {

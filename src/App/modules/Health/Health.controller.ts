@@ -1,14 +1,10 @@
 import HealthBusiness from './Health.business';
 
 class HealthController {
-  protected helthBusiness: HealthBusiness;
-
-  constructor(helthBusiness: HealthBusiness) {
-    this.helthBusiness = helthBusiness;
-  }
+  constructor(private healthBusiness: HealthBusiness) {}
 
   public async show() {
-    return this.helthBusiness.getHelth();
+    return this.healthBusiness.getHelth();
   }
 }
 

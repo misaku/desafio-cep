@@ -1,15 +1,15 @@
-import { getRepository } from 'typeorm';
 import { compare } from 'bcryptjs';
 import JWT from 'jsonwebtoken';
 
-import User from '../../../DataBase/entity/User';
 import AppError from '../../../errors/AppError';
 
-class AuthBusiness {
-  public async store({ email, password }) {
-    const userEpository = getRepository(User);
+import { IUserRepository } from '../User/User.interfaces';
 
-    const user = await userEpository.findOne({ where: { email } });
+class AuthBusiness {
+  constructor(private userRepository: IUserRepository) {}
+
+  public async store({ email, password }) {
+    const user = await this.userRepository.findByEmail(email);
 
     if (!user) {
       throw new AppError('Usuário/Senha Inválidos');

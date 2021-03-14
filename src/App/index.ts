@@ -26,15 +26,10 @@ class App extends MainApp {
     const getRoutesFilesFromDirname = (dirname: string) =>
       (dir.files(dirname, { sync: true }) || []).filter(isRouteFile);
 
-    // AUTO LOAD DE ROTAS
-    let Routes: any[] = [];
-
     getRoutesFilesFromDirname(path.join(__dirname, './modules')).forEach(fileName => {
       // eslint-disable-next-line @typescript-eslint/no-var-requires,global-require,import/no-dynamic-require
-      Routes = [...Routes, ...require(fileName).default];
+      require(fileName).default(this.server);
     });
-
-    this.server.route(Routes);
   }
 }
 

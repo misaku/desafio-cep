@@ -55,3 +55,5 @@ class Cep {
     return newReverseCep.reverse().join('');
   }
 }
+
+export default Cep;

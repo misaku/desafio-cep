@@ -1,13 +1,18 @@
 import { hash } from 'bcryptjs';
+import { inject, injectable } from 'tsyringe';
 import User from '../../../DataBase/entity/User';
 import AppError from '../../../errors/AppError';
 
-import { IRequestUserDto, IUserRepository } from './User.interfaces';
+import { ICreateUserDTO, IUserBusiness, IUserRepository } from './User.interfaces';
 
-class UserBusiness {
-  constructor(private userRepository: IUserRepository) {}
+@injectable()
+class UserBusiness implements IUserBusiness {
+  constructor(
+    @inject('UserRepository')
+    private userRepository: IUserRepository,
+  ) {}
 
-  public async createUser({ email, name, password }: IRequestUserDto): Promise<User> {
+  public async createUser({ email, name, password }: ICreateUserDTO): Promise<User> {
     const checkUserExist = await this.userRepository.findByEmail(email);
 
     if (checkUserExist) {

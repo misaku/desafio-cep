@@ -1,10 +1,10 @@
 import * as Hapi from '@hapi/hapi';
 
+import { container } from 'tsyringe';
 import HealthController from './Health.controller';
-import HealthBusiness from './Health.business';
 
 export default (server: Hapi.Server) => {
-  const controller = new HealthController(new HealthBusiness());
+  const controller = container.resolve(HealthController);
   server.bind(controller);
   server.route([
     {

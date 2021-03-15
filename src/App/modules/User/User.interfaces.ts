@@ -1,3 +1,4 @@
+import { Request } from '@hapi/hapi';
 import User from '../../../DataBase/entity/User';
 
 export interface ICreateUserDTO {
@@ -14,8 +15,10 @@ export interface IUserRepository {
   create(data: ICreateUserDTO): Promise<User>;
 }
 
-export interface IRequestUserDto {
-  name: string;
-  email: string;
-  password: string;
+export interface IUserBusiness {
+  createUser(data: ICreateUserDTO): Promise<User>;
+}
+
+export interface IUserController {
+  store(data: Request): Promise<User>;
 }

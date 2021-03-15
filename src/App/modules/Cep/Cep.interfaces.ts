@@ -1,11 +1,13 @@
-export interface ResponseErrorDTO {
+import { Request } from '@hapi/hapi';
+
+export interface IResponseErrorDTO {
   erro: string;
 }
 
-export interface ResponseErrorApiDTO {
+export interface IResponseErrorApiDTO {
   erro: boolean;
 }
-export interface ResponseSuccessDTO {
+export interface IResponseSuccessDTO {
   cep: string;
   logradouro: string;
   complemento: string;
@@ -17,11 +19,21 @@ export interface ResponseSuccessDTO {
   ddd: string;
   siafi: string;
 }
-export interface ResponseDTO {
+export interface IResponseDTO {
   success: boolean;
-  data: ResponseErrorDTO | ResponseSuccessDTO;
+  data: IResponseErrorDTO | IResponseSuccessDTO;
 }
 
-export interface CepServicesDTO {
-  getAddress(cep: string): Promise<ResponseDTO>;
+export interface ICepServices {
+  getAddress(cep: string): Promise<IResponseDTO>;
+}
+
+export interface ICepBusiness {
+  getAddress(data: string): Promise<IResponseSuccessDTO>;
+  getAddress2(data: string): Promise<IResponseSuccessDTO>;
+}
+
+export interface ICepController {
+  show(data: Request): Promise<IResponseSuccessDTO>;
+  show2(data: Request): Promise<IResponseSuccessDTO>;
 }

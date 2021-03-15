@@ -2,7 +2,6 @@ import Inert from '@hapi/inert';
 import Vision from '@hapi/vision';
 import HapiSwagger from 'hapi-swagger';
 import * as Hapi from '@hapi/hapi';
-import { getCustomRepository } from 'typeorm';
 import UserRepository from './modules/User/User.repository';
 
 /**

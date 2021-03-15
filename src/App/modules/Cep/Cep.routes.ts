@@ -1,11 +1,10 @@
 import * as Hapi from '@hapi/hapi';
+import { container } from 'tsyringe';
 import CepSchema from './Cep.schema';
 import CepController from './Cep.controller';
-import CepBusiness from './Cep.business';
-import CepServices from './Cep.services';
 
 export default (server: Hapi.Server) => {
-  const controller = new CepController(new CepBusiness(new CepServices()));
+  const controller = container.resolve(CepController);
   server.bind(controller);
   server.route([
     {

@@ -1,26 +1,31 @@
+import { inject, injectable } from 'tsyringe';
 import Cep from './Cep';
 import CepServices from './Cep.services';
 import AppError from '../../../errors/AppError';
-import { ResponseDTO } from './Cep.interfaces';
+import { ICepBusiness, IResponseSuccessDTO } from './Cep.interfaces';
 
-class CepBusiness {
-  constructor(private service: CepServices) {}
+@injectable()
+class CepBusiness implements ICepBusiness {
+  constructor(
+    @inject('CepServices')
+    private service: CepServices,
+  ) {}
 
   public async getAddress(cepValue: string) {
     if (Cep.isValid(cepValue)) {
       let cep = Cep.clearedValue(cepValue);
-      let stopGetAddres = false;
-      while (!stopGetAddres) {
+      let stopGetAddress = false;
+      while (!stopGetAddress) {
         if (cep !== '00000000') {
           // eslint-disable-next-line no-await-in-loop
           const response = await this.service.getAddress(cep);
           if (response.success) {
-            stopGetAddres = true;
-            return response.data;
+            stopGetAddress = true;
+            return response.data as IResponseSuccessDTO;
           }
           cep = Cep.possibleNewCep(cep);
         } else {
-          stopGetAddres = true;
+          stopGetAddress = true;
           throw new AppError('Não foi possivel encontrar um resultado');
         }
       }
@@ -28,16 +33,15 @@ class CepBusiness {
     throw new AppError('Cep Inaválido');
   }
 
-  public async getAddress2(cepValue: string) {
+  public async getAddress2(cepValue: string): Promise<IResponseSuccessDTO> {
     if (Cep.isValid(cepValue)) {
       const cep = Cep.clearedValue(cepValue);
       if (cep !== '00000000') {
-        let response = await this.service.getAddress(cep);
+        const response = await this.service.getAddress(cep);
         if (response.success) {
-          return response.data;
+          return response.data as IResponseSuccessDTO;
         }
-        response = (await this.getAddress2(Cep.possibleNewCep(cep))) as ResponseDTO;
-        return response;
+        return (await this.getAddress2(Cep.possibleNewCep(cep))) as IResponseSuccessDTO;
       }
       throw new AppError('Não foi possivel encontrar um resultado');
     }

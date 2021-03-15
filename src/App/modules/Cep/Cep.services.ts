@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
-import { CepServicesDTO, ResponseDTO, ResponseErrorApiDTO, ResponseSuccessDTO } from './Cep.interfaces';
+import { ICepServices, IResponseDTO, IResponseErrorApiDTO, IResponseSuccessDTO } from './Cep.interfaces';
 
-class CepServices implements CepServicesDTO {
+class CepServices implements ICepServices {
   protected api: AxiosInstance;
 
   constructor() {
@@ -12,13 +12,13 @@ class CepServices implements CepServicesDTO {
 
   public async getAddress(cep: string) {
     try {
-      const response = await this.api.get<ResponseErrorApiDTO | ResponseSuccessDTO>(`/${cep}/json/unicode/`);
+      const response = await this.api.get<IResponseErrorApiDTO | IResponseSuccessDTO>(`/${cep}/json/unicode/`);
       if (response.status === 200) {
-        if (!(response.data as ResponseErrorApiDTO).erro) {
+        if (!(response.data as IResponseErrorApiDTO).erro) {
           return {
             success: true,
             data: response.data,
-          } as ResponseDTO;
+          } as IResponseDTO;
         }
       }
     } catch (e) {
@@ -32,7 +32,7 @@ class CepServices implements CepServicesDTO {
     return {
       success: false,
       data: {
-        erro: 'Não foi possivel encontrar um resultado',
+        erro: 'Não foi possível encontrar um resultado',
       },
     };
   }

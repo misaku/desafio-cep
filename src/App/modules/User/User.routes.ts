@@ -1,11 +1,10 @@
 import * as Hapi from '@hapi/hapi';
+import { container } from 'tsyringe';
 import UserController from './User.controller';
-import UserBusiness from './User.business';
 import UserSchema from './User.schema';
-import UserRepository from './User.repository';
 
 export default (server: Hapi.Server) => {
-  const controller = new UserController(new UserBusiness(new UserRepository()));
+  const controller = container.resolve(UserController);
   server.bind(controller);
   server.route([
     {

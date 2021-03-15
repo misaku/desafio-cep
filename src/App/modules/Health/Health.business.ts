@@ -1,7 +1,8 @@
 import { getConnection } from 'typeorm';
+import { IHealthBusiness, IHealthBusinessReponseDTO } from './Health.interfaces';
 
-class HealthBusiness {
-  public async getHelth() {
+class HealthBusiness implements IHealthBusiness {
+  public async getHealth() {
     let database: string;
     try {
       getConnection('default');
@@ -17,7 +18,7 @@ class HealthBusiness {
       database: {
         status: database,
       },
-    };
+    } as IHealthBusinessReponseDTO;
   }
 }
 export default HealthBusiness;

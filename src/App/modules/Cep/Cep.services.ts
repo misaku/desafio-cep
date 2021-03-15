@@ -1,13 +1,12 @@
-import axios, { AxiosInstance } from 'axios';
+import { AxiosInstance } from 'axios';
+import api from '../../api';
 import { ICepServices, IResponseDTO, IResponseErrorApiDTO, IResponseSuccessDTO } from './Cep.interfaces';
 
 class CepServices implements ICepServices {
   protected api: AxiosInstance;
 
   constructor() {
-    this.api = axios.create({
-      baseURL: 'https://viacep.com.br/ws',
-    });
+    this.api = api;
   }
 
   public async getAddress(cep: string) {

@@ -20,6 +20,10 @@ abstract class MainApp implements MainAppInterface {
     });
   }
 
+  public getServer() {
+    return this.server;
+  }
+
   /**
    * Metodo de Executado antes do Registro de Plugins
    * @type {function():Promise<void>}

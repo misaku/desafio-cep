@@ -1,6 +1,10 @@
 import { container } from 'tsyringe';
 
-import { IUserRepository } from './modules/User/User.interfaces';
+import { IUserBusiness, IUserRepository } from './modules/User/User.interfaces';
+import { IAuthBusiness } from './modules/Auth/Auth.interfaces';
+import { ICepBusiness, ICepServices } from './modules/Cep/Cep.interfaces';
+import { IHealthBusiness } from './modules/Health/Health.interfaces';
+
 import UserRepository from './modules/User/User.repository';
 import UserBusiness from './modules/User/User.business';
 import AuthBusiness from './modules/Auth/Auth.business';
@@ -9,8 +13,8 @@ import CepBusiness from './modules/Cep/Cep.business';
 import HealthBusiness from './modules/Health/Health.business';
 
 container.registerSingleton<IUserRepository>('UserRepository', UserRepository);
-container.registerSingleton('UserBusiness', UserBusiness);
-container.registerSingleton('AuthBusiness', AuthBusiness);
-container.registerSingleton('CepServices', CepServices);
-container.registerSingleton('CepBusiness', CepBusiness);
-container.registerSingleton('HealthBusiness', HealthBusiness);
+container.registerSingleton<IUserBusiness>('UserBusiness', UserBusiness);
+container.registerSingleton<IAuthBusiness>('AuthBusiness', AuthBusiness);
+container.registerSingleton<ICepServices>('CepServices', CepServices);
+container.registerSingleton<ICepBusiness>('CepBusiness', CepBusiness);
+container.registerSingleton<IHealthBusiness>('HealthBusiness', HealthBusiness);

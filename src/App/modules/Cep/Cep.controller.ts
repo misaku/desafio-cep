@@ -1,13 +1,13 @@
 import { Request } from '@hapi/hapi';
 import { inject, injectable } from 'tsyringe';
-import CepBusiness from './Cep.business';
-import { ICepController } from './Cep.interfaces';
+
+import { ICepBusiness, ICepController } from './Cep.interfaces';
 
 @injectable()
 class CepController implements ICepController {
   constructor(
     @inject('CepBusiness')
-    private cepBusiness: CepBusiness,
+    private cepBusiness: ICepBusiness,
   ) {}
 
   public async show({ params: { cepValue } }: Request) {

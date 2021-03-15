@@ -1,14 +1,13 @@
 import { inject, injectable } from 'tsyringe';
 import { Request } from '@hapi/hapi';
-import UserBusiness from './User.business';
 
-import { ICreateUserDTO, IUserController } from './User.interfaces';
+import { ICreateUserDTO, IUserBusiness, IUserController } from './User.interfaces';
 
 @injectable()
 class UserController implements IUserController {
   constructor(
     @inject('UserBusiness')
-    private userBusiness: UserBusiness,
+    private userBusiness: IUserBusiness,
   ) {}
 
   public async store({ payload }: Request) {

@@ -1,12 +1,12 @@
 import { inject, injectable } from 'tsyringe';
-import HealthBusiness from './Health.business';
-import { IHealthController } from './Health.interfaces';
+
+import { IHealthBusiness, IHealthController } from './Health.interfaces';
 
 @injectable()
 class HealthController implements IHealthController {
   constructor(
     @inject('HealthBusiness')
-    private healthBusiness: HealthBusiness,
+    private healthBusiness: IHealthBusiness,
   ) {}
 
   public async show() {

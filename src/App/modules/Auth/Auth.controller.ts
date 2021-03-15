@@ -1,13 +1,12 @@
 import { inject, injectable } from 'tsyringe';
 import { Request } from '@hapi/hapi';
-import AuthBusiness from './Auth.business';
-import { IAuthController, IAuthRequestDTO } from './Auth.interfaces';
+import { IAuthBusiness, IAuthController, IAuthRequestDTO } from './Auth.interfaces';
 
 @injectable()
 class AuthController implements IAuthController {
   constructor(
     @inject('AuthBusiness')
-    private authBusiness: AuthBusiness,
+    private authBusiness: IAuthBusiness,
   ) {}
 
   public async store({ payload }: Request) {

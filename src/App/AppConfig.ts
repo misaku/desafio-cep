@@ -39,7 +39,7 @@ export const swaggerConfig = () => {
  * Configuração simplificada do plugin de autenticação
  * */
 export const autenticateConfig = (server: Hapi.Server) => {
-  let validate = async decoded => {
+  let validate = async (decoded: any) => {
     return { isValid: false };
   };
   try {

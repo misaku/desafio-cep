@@ -16,7 +16,7 @@ class Cep {
    * @public
    */
   public static isValid(cep: string) {
-    const format = /^[0-9]{2}?(\.?)[0-9]{3}?((-|.|\s)?)[0-9]{3}$/g;
+    const format = /^[0-9]{2}?(\.?)[0-9]{3}?((-|\.|\s)?)[0-9]{3}$/g;
 
     return format.test(cep.trim());
   }

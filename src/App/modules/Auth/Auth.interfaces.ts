@@ -4,9 +4,11 @@ export interface IAuthRequestDTO {
   email: string;
   password: string;
 }
+
 export interface IAuthResponseDTO {
   token: string;
 }
+
 export interface IAuthBusiness {
   store(data: IAuthRequestDTO): Promise<IAuthResponseDTO>;
 }

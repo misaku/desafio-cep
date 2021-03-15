@@ -99,6 +99,61 @@
 
 
 
+    <section>
+        <article><h1>DESAFIO</h1>
+<h2>1 - Expor um serviço de BUSCA DE CEP</h2>
+<p>Eu, como usuário, quero informar meu CEP e obter o nome da minha
+RUA, BAIRRO, CIDADE e ESTADO para preencher meus dados de cadastro de forma automática.
+Os critérios de aceite dessa história são:</p>
+<ul>
+<li>[x] Dado um CEP válido, deve retornar o endereço correspondente</li>
+<li>[x] Dado um CEP válido, que não exista o endereço, deve substituir um dígito da direita para a esquerda por zero até que o endereço seja localizado (Exemplo: Dado 22333999 tentar com 22333990, 22333900 …)</li>
+<li>[x] Dado um CEP inválido, deve retornar uma mensagem reportando o erro: &quot;CEP inválido&quot;
+<ul>
+<li><em><strong>Há duas maneiras de interpretar um CEP inválido, uma é não segue padrão de formatação de CEP, outra é não foi encontrado dados para o CEP informado, eu considerei com  inválido quaisquer dado diferente das seguintes formatações <code>00.000.000</code>, <code>00.000-000</code>, <code>00.000 000</code>, <code>00000.000</code>, <code>00000-000</code>, <code>00000 000</code>, <code>00000000</code>, ja a segunda opção não considerei como inválido sómente não encontrado.</strong></em></li>
+<li><em><strong>OBS: Consegui visualizar dois algoritimos para solução, um é um algoritimo recursivo e outro através de um loop, particularmente eu prefiro o recursivo pois acho que fica um pouco mais claro, mas acredito que através do loop a aplicação consome menos memoria, como o objetivo deste desafio é mostrar meu conhecimento resolvi fazer as duas resoluções</strong></em></li>
+</ul>
+</li>
+</ul>
+<h3>O que se espera para as questões, dicas e direcionamentos:</h3>
+<ul>
+<li>[x] Os serviços devem receber e responder JSON;</li>
+<li>[ ] Faça o uso de Mocks principalmente nos testes;</li>
+<li>[ ] Os dados dos CEPs podem ser &quot;Mocados&quot;;</li>
+<li>[ ] Pense em como documentar os cenários desenvolvidos (Testes sempre são uma boa forma de documentar);</li>
+<li>[ ] Ao finalizar o desenvolvimento você pode compartilhar o código pelo Github ou de outra maneira que preferir (como arquivo compactado). Se possível, em caso de arquivo compactado, envie o mesmo para um virtual drive e compartilha o link na prova;</li>
+<li>[ ] Fique a vontade para entrar em contato e tirar dúvidas;</li>
+<li>[ ] Juntamente com o Código, deve-se documentar a estratégia utilizada para a criação da aplicação, a arquitetura utilizada e os padrões. A documentação pode ser feita via GIT/Bitbucket ou adicionado no HackerRank. Isto faz parte da avaliação da prova.</li>
+<li>[ ] Em caso de uso do Git/Bitbucket não esqueça de criar o .gitignore.</li>
+</ul>
+<h3>Extras:</h3>
+<ul>
+<li>[x] preferencialmente use um versionador e faça commits granulares;</li>
+<li>[ ] api com autorização;</li>
+<li>[ ] boas práticas de design de api;</li>
+<li>[x] swagger com a documentação;</li>
+<li>[x] tecnologias preferenciais: java ou node.js - justifique, no readme a escolha da tecnologia.
+<ul>
+<li><em><strong>Foi adotado <code>node.js</code>, é uma tecnologia que tenho mais familiaridade e também é a stack forte da squad.</strong></em></li>
+</ul>
+</li>
+</ul>
+<h3>Extras plus plus master (não é mandatório, apenas diferencial se vc tiver tempo e conhecimento):</h3>
+<ul>
+<li>[ ] logs estruturados;</li>
+<li>[ ] endpoint para saúde da aplicação;</li>
+<li>[ ] endpoint para métricas da aplicação;</li>
+<li>[ ] considere a performance do algoritmo e o tempo de resposta da aplicação, sabendo que a API  pode receber flutuações de tráfego agressivas.</li>
+</ul>
+<h2>2 - Quando você digita a URL de um site (http://www.netshoes.com.br) no browser e pressiona enter, explique da forma que preferir, o que ocorre nesse processo do protocolo HTTP entre o Client e o Server.</h2>
+<p>O que espera-se como resposta - Dicas e direcionamentos:</p>
+<ul>
+<li>Detalhe sua linha de raciocínio;</li>
+<li>Elabore um plano de entendimento, por exemplo, lista, de forma a elencar os passos;</li>
+<li>Não copie conteúdo da internet, responda com suas palavras.</li>
+</ul></article>
+    </section>
+
 
 
 

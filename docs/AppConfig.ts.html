@@ -89,6 +89,7 @@
 import Vision from '@hapi/vision';
 import HapiSwagger from 'hapi-swagger';
 import * as Hapi from '@hapi/hapi';
+import UserRepository from './modules/User/User.repository';
 
 /**
  * Configuração do swagger
@@ -109,12 +110,6 @@ export const swaggerConfig = () => {
     },
     documentationPath: '/doc',
     grouping: 'tags',
-    tags: [
-      {
-        name: 'BUSCA',
-        description: 'Rotas responsavei para busca de cep',
-      },
-    ],
     security: [{ jwt: [] }],
   };
   return [
@@ -131,18 +126,22 @@ export const swaggerConfig = () => {
  * Configuração simplificada do plugin de autenticação
  * */
 export const autenticateConfig = (server: Hapi.Server) => {
-  const people = {
-    1: {
-      id: 1,
-      name: 'LuizaLabs',
-    },
+  let validate = async (decoded: any) => {
+    return { isValid: false };
   };
-  const validate = async decoded => {
-    if (!people[decoded.id]) {
-      return { isValid: false };
-    }
-    return { isValid: true };
-  };
+  try {
+    const userReposirory = new UserRepository();
+    validate = async (decoded: { email: any; id: any }) => {
+      const user = userReposirory.findByIdAndEmail(decoded.id, decoded.email);
+      if (!user) {
+        return { isValid: false };
+      }
+      return { isValid: true };
+    };
+  } catch (e) {
+    console.error('banco de dados indisponivel');
+  }
+
   server.auth.strategy('jwt', 'jwt', {
     key: 'BuscaCep-LuizaLabs',
     validate,

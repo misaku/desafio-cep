@@ -36,3 +36,16 @@ jobs:
         args: test
       env:
         CI: true
+        DB_TYPE: postgres
+        DB_HOST: localhost
+        DB_PORT: 5432
+        DB_USER: root
+        DB_PASSWORD: 123456
+        DB_NAME: buscacep
+        APP_SECRET: BuscaCep-LuizaLabs
+        REDIS_PORT: 6379
+        REDIS_HOST: 127.0.0.1
+        REDIS_FAMILY: 4
+        REDIS_PASSWORD:
+        REDIS_NUMBER:
+        SENTRY_DNS: htttp://sentredns

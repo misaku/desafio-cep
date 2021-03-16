@@ -4,7 +4,7 @@ import JWT from 'jsonwebtoken';
 import axios from '../../../api';
 import App from '../../../index';
 
-import '../../../Container';
+import '../../../test/Container';
 
 const mock = new MockAdapter(axios);
 const token = JWT.sign(

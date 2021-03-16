@@ -6,12 +6,12 @@ export default class RedisCacheProvider implements ICacheProvider {
 
   constructor() {
     this.redis = new Redis({
-      port: 6379, // Redis port
-      host: '127.0.0.1', // Redis host
-      family: 4, // 4 (IPv4) or 6 (IPv6)
-      password: undefined,
-      db: undefined,
-    });
+      port: (process.env.REDIS_PORT && Number(process.env.REDIS_PORT)) || undefined, // Redis port
+      host: process.env.REDIS_HOST || undefined, // Redis host
+      family: (process.env.REDIS_FAMILY && Number(process.env.REDIS_FAMILY)) || undefined, // 4 (IPv4) or 6 (IPv6)
+      password: process.env.REDIS_PASSWORD || undefined,
+      db: process.env.REDIS_NUMBER || undefined,
+    } as any);
   }
 
   async recover(key: string): Promise<string | null> {

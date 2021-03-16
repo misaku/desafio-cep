@@ -33,7 +33,7 @@ class AuthBusiness implements IAuthBusiness {
         name: user.name,
         email: user.email,
       },
-      'BuscaCep-LuizaLabs',
+      process.env.APP_SECRET || '',
     );
 
     return {

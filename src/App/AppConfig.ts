@@ -56,7 +56,7 @@ export const autenticateConfig = (server: Hapi.Server) => {
   }
 
   server.auth.strategy('jwt', 'jwt', {
-    key: 'BuscaCep-LuizaLabs',
+    key: process.env.APP_SECRET,
     validate,
     verifyOptions: { ignoreExpiration: true },
   });

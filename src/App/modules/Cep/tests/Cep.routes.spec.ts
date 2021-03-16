@@ -6,6 +6,9 @@ import App from '../../../index';
 
 import '../../../test/Container';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+require('dotenv').config();
+
 const mock = new MockAdapter(axios);
 const token = JWT.sign(
   {
@@ -13,7 +16,8 @@ const token = JWT.sign(
     name: 'usuario',
     email: 'usuario@teste.com',
   },
-  'BuscaCep-LuizaLabs',
+  // ts-ignore
+  process.env.APP_SECRET || '',
 );
 
 const cep = '14050360';

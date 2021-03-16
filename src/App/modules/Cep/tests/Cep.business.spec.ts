@@ -8,8 +8,9 @@ jest.mock('../Cep', () => ({
   clearedValue: (data: string) => data,
   possibleNewCep: (data: string) => '14050300',
 }));
+
 describe('CepBusiness', () => {
-  it('should be able address1 in first time', async () => {
+  it('should be able get address method1 in first time', async () => {
     const cepBusiness = new CepBusiness(
       {
         getAddress: async data =>
@@ -25,7 +26,8 @@ describe('CepBusiness', () => {
     const response1 = await cepBusiness.getAddress('14050360');
     expect(response1.cep).toBe('14050360');
   });
-  it('should be able address2 in first time', async () => {
+
+  it('should be able get address method2 in first time', async () => {
     const cepBusiness = new CepBusiness(
       {
         getAddress: async data =>
@@ -41,7 +43,8 @@ describe('CepBusiness', () => {
     const response2 = await cepBusiness.getAddress2('14050360');
     expect(response2.cep).toBe('14050360');
   });
-  it('should be able address with cache', async () => {
+
+  it('should be able get address with cache', async () => {
     const cepBusiness = new CepBusiness(
       {
         getAddress: async data =>
@@ -59,7 +62,7 @@ describe('CepBusiness', () => {
     expect(response1.cep).toBe(response2.cep);
     expect(response1.cep).toBe('12345-678');
   });
-  it('should be able address1 in second time', async () => {
+  it('should be able get address method1 in second time', async () => {
     const cepBusiness = new CepBusiness(
       {
         getAddress: async data =>
@@ -76,7 +79,7 @@ describe('CepBusiness', () => {
     expect(response1.cep).toBe('14050300');
   });
 
-  it('should be able address2 in second time', async () => {
+  it('should be able get address method2 in second time', async () => {
     const cepBusiness = new CepBusiness(
       {
         getAddress: async data =>
@@ -108,7 +111,7 @@ describe('CepBusiness', () => {
     await expect(cepBusiness.getAddress2('00000000')).rejects.toBeInstanceOf(Error);
   });
 
-  it('should not be able address with invalid cep', async () => {
+  it('should not be able get address with invalid cep', async () => {
     mockValid = false;
     const cepBusiness = new CepBusiness(
       {

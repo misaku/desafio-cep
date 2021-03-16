@@ -78,6 +78,7 @@
         "hapi-auth-jwt2": "^10.2.0",
         "hapi-sentry": "^3.1.0",
         "hapi-swagger": "^14.1.0",
+        "hapijs-status-monitor": "^1.0.1",
         "joi": "^17.4.0",
         "json5": "^2.2.0",
         "jsonwebtoken": "^8.5.1",

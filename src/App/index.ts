@@ -4,13 +4,26 @@ import hapiAuthJWT from 'hapi-auth-jwt2';
 import MainApp from './MainApp';
 import { autenticateConfig, swaggerConfig } from './AppConfig';
 import ExceptionHandlerExtension from '../errors/ExceptionHandlerExtension';
+import SentryRegister from '../errors/SentryRegister';
 
 class App extends MainApp {
   async registerPlugins() {
     await super.registerPlugins();
 
     await this.server.register([hapiAuthJWT, ...(swaggerConfig() as any)]);
+
+    await this.server.register({
+      // eslint-disable-next-line global-require
+      plugin: require('hapijs-status-monitor'),
+      options: {
+        title: 'Monitor Server Busca Cep',
+        routeConfig: {
+          auth: false,
+        },
+      },
+    });
     ExceptionHandlerExtension(this.server);
+    await SentryRegister(this.server);
   }
 
   async postRegisterPlugins() {

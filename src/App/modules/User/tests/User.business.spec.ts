@@ -1,6 +1,5 @@
 import UserBusiness from '../User.business';
 import UserFakeRepository from './fakes/User.fake.repository';
-import AppError from '../../../../errors/AppError';
 
 describe('UserBusiness', () => {
   it('should be create a user', async () => {
@@ -32,6 +31,6 @@ describe('UserBusiness', () => {
         email: 'usuario@teste.com',
         password: '123',
       }),
-    ).rejects.toBeInstanceOf(AppError);
+    ).rejects.toBeInstanceOf(Error);
   });
 });

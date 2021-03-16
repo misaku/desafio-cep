@@ -1,6 +1,5 @@
 import CepBusiness from '../Cep.business';
 import { ICepServices } from '../Cep.interfaces';
-import AppError from '../../../../errors/AppError';
 
 let mockValid = true;
 jest.mock('../Cep', () => ({
@@ -48,8 +47,8 @@ describe('CepBusiness', () => {
         } as any),
     } as ICepServices);
 
-    await expect(cepBusiness.getAddress('00000000')).rejects.toBeInstanceOf(AppError);
-    await expect(cepBusiness.getAddress2('00000000')).rejects.toBeInstanceOf(AppError);
+    await expect(cepBusiness.getAddress('00000000')).rejects.toBeInstanceOf(Error);
+    await expect(cepBusiness.getAddress2('00000000')).rejects.toBeInstanceOf(Error);
   });
 
   it('should not be able address with invalid cep', async () => {
@@ -63,7 +62,7 @@ describe('CepBusiness', () => {
         } as any),
     } as ICepServices);
 
-    await expect(cepBusiness.getAddress('00000000')).rejects.toBeInstanceOf(AppError);
-    await expect(cepBusiness.getAddress2('00000000')).rejects.toBeInstanceOf(AppError);
+    await expect(cepBusiness.getAddress('00000000')).rejects.toBeInstanceOf(Error);
+    await expect(cepBusiness.getAddress2('00000000')).rejects.toBeInstanceOf(Error);
   });
 });

@@ -1,4 +1,4 @@
-import { Request } from '@hapi/hapi';
+import {Request, ResponseToolkit} from '@hapi/hapi';
 import User from '../../../DataBase/entity/User';
 
 export interface ICreateUserDTO {
@@ -20,5 +20,5 @@ export interface IUserBusiness {
 }
 
 export interface IUserController {
-  store(data: Request): Promise<User>;
+  store(data: Request, response: ResponseToolkit): Promise<any>;
 }

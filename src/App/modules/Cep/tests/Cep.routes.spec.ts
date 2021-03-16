@@ -35,16 +35,15 @@ jest.mock('../../User/User.repository', () =>
     findByIdAndEmail: (id: string, email: string) => true,
   })),
 );
-let server: any;
+const FactoryServer = new App();
+const server = FactoryServer.getServer();
 beforeAll(async done => {
-  const FactoryServer = new App();
   await FactoryServer.start(true);
-  server = FactoryServer.getServer();
   done();
 }, 30000);
 
 afterAll(async done => {
-  if (server && server.stop) await server.stop({ timeout: 0 });
+  await server.stop();
   done();
 }, 30000);
 

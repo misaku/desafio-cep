@@ -13,6 +13,7 @@ const SentryRegister = async (server: Hapi.Server) => {
   server.ext({
     type: 'onPostAuth',
     method(request: any, h) {
+      // eslint-disable-next-line no-unused-expressions
       request.payload && request.sentryScope.setExtra('payload', request.payload);
       return h.continue;
     },

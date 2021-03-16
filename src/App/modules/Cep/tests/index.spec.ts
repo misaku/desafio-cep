@@ -3,7 +3,7 @@ import * as JSON5 from 'json5';
 import JWT from 'jsonwebtoken';
 import axios from '../../../api';
 import App from '../../../index';
-import DataBase from '../../../../DataBase';
+
 import '../../../Container';
 
 const mock = new MockAdapter(axios);
@@ -37,12 +37,10 @@ jest.mock('../../User/User.repository', () =>
 );
 let server: any;
 beforeAll(async done => {
-  DataBase(async () => {
-    const FactoryServer = new App();
-    await FactoryServer.start(true);
-    server = FactoryServer.getServer();
-    done();
-  });
+  const FactoryServer = new App();
+  await FactoryServer.start(true);
+  server = FactoryServer.getServer();
+  done();
 }, 30000);
 
 afterAll(async done => {
@@ -63,6 +61,14 @@ describe('teste route cep', () => {
     expect(response.statusCode).toBe(200);
     expect(JSON5.stringify(JSON5.parse(response.payload))).toBe(JSON5.stringify(data));
   });
+  it('return 401 status', async () => {
+    const options = {
+      method: 'GET',
+      url: `/cep/${cep}`,
+    };
+    const response = await server.inject(options);
+    expect(response.statusCode).toBe(401);
+  });
 });
 
 describe('teste route cep2', () => {
@@ -77,5 +83,13 @@ describe('teste route cep2', () => {
     const response = await server.inject(options);
     expect(response.statusCode).toBe(200);
     expect(JSON5.stringify(JSON5.parse(response.payload))).toBe(JSON5.stringify(data));
+  });
+  it('return 401 status', async () => {
+    const options = {
+      method: 'GET',
+      url: `/cep2/${cep}`,
+    };
+    const response = await server.inject(options);
+    expect(response.statusCode).toBe(401);
   });
 });

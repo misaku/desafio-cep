@@ -4,7 +4,7 @@ import * as Tracing from '@sentry/tracing';
 
 const SentryRegister = async (server: Hapi.Server) => {
   Sentry.init({
-    dsn: 'https://d2c67cceb2b740e9afc69a26c01125f3@o215059.ingest.sentry.io/5678311',
+    dsn: process.env.SENTRY_DNS,
     tracesSampleRate: 1.0,
   });
   // eslint-disable-next-line global-require

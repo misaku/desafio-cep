@@ -48,4 +48,4 @@ jobs:
         REDIS_FAMILY: 4
         REDIS_PASSWORD:
         REDIS_NUMBER:
-        SENTRY_DNS: htttp://sentredns
+        SENTRY_DNS: 'https://d2c67cceb2b740e9afc69a26c01125f3@o215059.ingest.sentry.io/5678311'

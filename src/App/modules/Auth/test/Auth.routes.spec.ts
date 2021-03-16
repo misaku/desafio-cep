@@ -5,6 +5,8 @@ import User from '../../../../DataBase/entity/User';
 
 import '../../../test/Container';
 
+import { hash } from 'bcryptjs';
+
 jest.mock('../../../../DataBase/entity/User', jest.fn());
 
 const repoMock = mock<Repository<User>>();
@@ -17,6 +19,7 @@ jest.mock('typeorm', () => {
     Entity: () => {},
   };
 });
+
 const FactoryServer = new App();
 const server = FactoryServer.getServer();
 beforeAll(async done => {
@@ -33,14 +36,13 @@ describe('teste route User', () => {
   it('return 200 status OK', async () => {
     const options = {
       method: 'POST',
-      url: `/user`,
+      url: `/auth`,
       payload: {
-        name: 'usuario',
-        email: 'usuario@teste.com',
+        email: 'firstUser@test.com',
         password: '123',
       },
     };
     const response = await server.inject(options);
-    expect(response.statusCode).toEqual(201);
+    expect(response.statusCode).toEqual(200);
   });
 });

@@ -74,7 +74,14 @@ export default {
   // ],
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
-  // moduleNameMapper: {},
+  moduleNameMapper: {
+    '@src/(.*)': '<rootDir>/src/$1',
+    '@App/(.*)': '<rootDir>/src/App/$1',
+    '@modules/(.*)': '<rootDir>/src/App/modules/$1',
+    '@provider/(.*)': '<rootDir>/src/App/provider/$1',
+    '@DataBase/(.*)': '<rootDir>/src/DataBase/$1',
+    '@errors/(.*)': '<rootDir>/src/errors/$1',
+  },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
   // modulePathIgnorePatterns: [],

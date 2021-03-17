@@ -1,7 +1,7 @@
 import { getRepository } from 'typeorm';
 import { v4 } from 'uuid';
+import User from '@DataBase/entity/User';
 import { IHealthBusiness, IHealthBusinessReponseDTO } from './Health.interfaces';
-import User from '../../../DataBase/entity/User';
 
 class HealthBusiness implements IHealthBusiness {
   public async getHealth() {

@@ -1,7 +1,8 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import MockAdapter from 'axios-mock-adapter';
 import * as JSON5 from 'json5';
-import axios from '../../../api';
-import CepServices from '../Cep.services';
+import axios from '@App/api';
+import CepServices from '@modules/Cep/Cep.services';
 
 const mock = new MockAdapter(axios);
 

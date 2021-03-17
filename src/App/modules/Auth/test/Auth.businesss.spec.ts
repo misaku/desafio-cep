@@ -1,5 +1,5 @@
-import UserFakeRepository from '../../User/tests/fakes/User.fake.repository';
-import AuthBusiness from '../Auth.business';
+import UserFakeRepository from '@modules/User/tests/fakes/User.fake.repository';
+import AuthBusiness from '@modules/Auth/Auth.business';
 
 jest.mock('bcryptjs', () => {
   const actualModule = jest.requireActual('bcryptjs');

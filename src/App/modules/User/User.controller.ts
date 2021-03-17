@@ -1,5 +1,5 @@
 import { inject, injectable } from 'tsyringe';
-import {Request, ResponseToolkit} from '@hapi/hapi';
+import { Request, ResponseToolkit } from '@hapi/hapi';
 
 import { ICreateUserDTO, IUserBusiness, IUserController } from './User.interfaces';
 

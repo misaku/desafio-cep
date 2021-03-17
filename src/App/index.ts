@@ -1,11 +1,11 @@
 import path from 'path';
 import * as dir from 'node-dir';
 import hapiAuthJWT from 'hapi-auth-jwt2';
-import MainApp from './MainApp';
+import ExceptionHandlerExtension from '@errors/ExceptionHandlerExtension';
+import SentryRegister from '@errors/SentryRegister';
+import LoggerRegister from '@errors/LoggerRegister';
 import { autenticateConfig, swaggerConfig } from './AppConfig';
-import ExceptionHandlerExtension from '../errors/ExceptionHandlerExtension';
-import SentryRegister from '../errors/SentryRegister';
-import LoggerRegister from '../errors/LoggerRegister';
+import MainApp from './MainApp';
 
 class App extends MainApp {
   async registerPlugins() {

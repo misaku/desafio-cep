@@ -1,5 +1,5 @@
 import { AxiosInstance } from 'axios';
-import api from '../../api';
+import api from '@App/api';
 import { ICepServices, IResponseDTO, IResponseErrorApiDTO, IResponseSuccessDTO } from './Cep.interfaces';
 
 class CepServices implements ICepServices {

@@ -1,3 +1,14 @@
+# RESPODER QUESATO 2
+cliente faz a requisição via http
+- um serviço de dns vai garantir que seja enviada a requisição para o servidor certo
+- essa requisição é feita entre um conexao TCP/IP
+- ao bater no servidor ele fornecer html inicial da pagina seja através de um cache, arquivou ou criado via server
+- ao retornar ao cliente o navegador vai processar os javascript e css e se necessário faz requisições buscando eles
+- no cliente o front-end vai fazer as requisições rest para o beck-end
+- no server beckend ele vai processar as requisiçoes,  buscar no banco ou cache e devolver uma resposta com os dados necessario para completar a pagina
+- ao receber os dados o no client o front end vai estrturar o html e css com os dados recebido e o cliente navegador vai garantir que as informações seja apresentada da maneira esperada
+
+
 - Há duas maneiras de interpretar um CEP inválido, uma é não segue padrão de formatação de CEP, outra é não foi encontrado dados para o CEP informado, eu considerei com  inválido quaisquer dado diferente das seguintes formatações `00.000.000`, `00.000-000`, `00.000 000`, `00000.000`, `00000-000`, `00000 000`, `00000000`, ja a segunda opção não considerei como inválido sómente não encontrado.
 - OBS: Consegui visualizar dois algoritimos para solução, um é um algoritimo recursivo e outro através de um loop, particularmente eu prefiro o recursivo pois acho que fica um pouco mais claro, mas acredito que através do loop a aplicação consome menos memoria, como o objetivo deste desafio é mostrar meu conhecimento resolvi fazer as duas resoluções
 - Foi adotado `node.js`, é uma tecnologia que tenho mais familiaridade e também é a stack forte da squad.

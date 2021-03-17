@@ -1,9 +1,9 @@
 import { inject, injectable } from 'tsyringe';
 import * as JSON5 from 'json5';
+import AppError from '@errors/AppError';
+import { ICacheProvider } from '@provider/cache/cache.provider.interfaces';
 import Cep from './Cep';
-import AppError from '../../../errors/AppError';
 import { ICepBusiness, ICepServices, IResponseSuccessDTO } from './Cep.interfaces';
-import { ICacheProvider } from '../../provider/cache/cache.provider.interfaces';
 
 @injectable()
 class CepBusiness implements ICepBusiness {

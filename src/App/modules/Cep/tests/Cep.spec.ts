@@ -1,4 +1,4 @@
-import Cep from '../Cep';
+import Cep from '@modules/Cep/Cep';
 
 describe('Class CEP', () => {
   it('should be valid CEP', () => {
@@ -28,7 +28,7 @@ describe('Class CEP', () => {
 
   it('should be add 0 right to left', () => {
     let cep = '14753362';
-    const pssibleCeps = [
+    const possibleCeps = [
       '14753360',
       '14753300',
       '14753000',
@@ -39,9 +39,9 @@ describe('Class CEP', () => {
       '00000000',
     ];
     // eslint-disable-next-line no-restricted-syntax
-    for (const pssibleCep of pssibleCeps) {
+    for (const possibleCep of possibleCeps) {
       cep = Cep.possibleNewCep(cep);
-      expect(cep).toBe(pssibleCep);
+      expect(cep).toBe(possibleCep);
     }
   });
 });

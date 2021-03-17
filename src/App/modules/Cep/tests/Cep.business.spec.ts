@@ -1,9 +1,9 @@
-import CepBusiness from '../Cep.business';
-import { ICepServices } from '../Cep.interfaces';
-import RedisCacheFakeProvider from '../../../provider/cache/fakes/RedisCache.fake.provider';
+import CepBusiness from '@modules/Cep/Cep.business';
+import { ICepServices } from '@modules/Cep/Cep.interfaces';
+import RedisCacheFakeProvider from '@provider/cache/fakes/RedisCache.fake.provider';
 
 let mockValid = true;
-jest.mock('../Cep', () => ({
+jest.mock('@modules/Cep/Cep', () => ({
   isValid: (data: string) => mockValid,
   clearedValue: (data: string) => data,
   possibleNewCep: (data: string) => '14050300',

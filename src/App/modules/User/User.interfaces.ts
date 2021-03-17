@@ -1,5 +1,5 @@
-import {Request, ResponseToolkit} from '@hapi/hapi';
-import User from '../../../DataBase/entity/User';
+import { Request, ResponseToolkit } from '@hapi/hapi';
+import User from '@DataBase/entity/User';
 
 export interface ICreateUserDTO {
   name: string;

@@ -1,10 +1,10 @@
 import MockAdapter from 'axios-mock-adapter';
 import * as JSON5 from 'json5';
 import JWT from 'jsonwebtoken';
-import axios from '../../../api';
-import App from '../../../index';
+import axios from '@App/api';
+import App from '@App/index';
 
-import '../../../test/Container';
+import '@App/test/Container';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();

@@ -1,10 +1,9 @@
 import { Repository } from 'typeorm';
 import { mock } from 'jest-mock-extended';
+import User from '@DataBase/entity/User';
 import UserRepository from '../User.repository';
-import UserFakeRepository from './fakes/User.fake.repository';
-import User from '../../../../DataBase/entity/User';
 
-jest.mock('../../../../DataBase/entity/User', jest.fn());
+jest.mock('@DataBase/entity/User', jest.fn());
 
 const repoMock = mock<Repository<User>>();
 

@@ -1,13 +1,13 @@
 import { mock } from 'jest-mock-extended';
 import { Repository } from 'typeorm';
-import App from '../../../index';
-import User from '../../../../DataBase/entity/User';
+import App from '@App/index';
+import User from '@DataBase/entity/User';
 
-import '../../../test/Container';
+import '@App/test/Container';
 
 import { hash } from 'bcryptjs';
 
-jest.mock('../../../../DataBase/entity/User', jest.fn());
+jest.mock('@DataBase/entity/User', jest.fn());
 
 const repoMock = mock<Repository<User>>();
 

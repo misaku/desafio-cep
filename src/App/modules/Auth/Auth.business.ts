@@ -2,9 +2,9 @@ import { compare } from 'bcryptjs';
 import JWT from 'jsonwebtoken';
 
 import { inject, injectable } from 'tsyringe';
-import AppError from '../../../errors/AppError';
+import AppError from '@errors/AppError';
 
-import { IUserRepository } from '../User/User.interfaces';
+import { IUserRepository } from '@modules/User/User.interfaces';
 import { IAuthBusiness, IAuthRequestDTO, IAuthResponseDTO } from './Auth.interfaces';
 
 @injectable()

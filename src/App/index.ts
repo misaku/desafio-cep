@@ -5,6 +5,7 @@ import MainApp from './MainApp';
 import { autenticateConfig, swaggerConfig } from './AppConfig';
 import ExceptionHandlerExtension from '../errors/ExceptionHandlerExtension';
 import SentryRegister from '../errors/SentryRegister';
+import LoggerRegister from '../errors/LoggerRegister';
 
 class App extends MainApp {
   async registerPlugins() {
@@ -24,6 +25,7 @@ class App extends MainApp {
     });
     ExceptionHandlerExtension(this.server);
     await SentryRegister(this.server);
+    await LoggerRegister(this.server);
   }
 
   async postRegisterPlugins() {

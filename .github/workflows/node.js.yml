@@ -49,3 +49,10 @@ jobs:
         REDIS_PASSWORD:
         REDIS_NUMBER:
         SENTRY_DNS: 'https://d2c67cceb2b740e9afc69a26c01125f3@o215059.ingest.sentry.io/5678311'
+        LOG: false
+        LOG_PATH_FILE: ./logs/server_log
+        LOG_HTTP: http://localhost:5000
+        LOG_HTTP_KEY: api-key
+        LOG_HTTP_VALUE: 123456
+        SERVER_PORT: 3000
+        SERVER_HOST: localhost

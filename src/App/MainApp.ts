@@ -15,8 +15,8 @@ abstract class MainApp implements MainAppInterface {
     });
 
     this.server = Hapi.server({
-      port: 3000,
-      host: 'localhost',
+      port: process.env.SERVER_PORT,
+      host: process.env.SERVER_HOST,
     });
   }
 

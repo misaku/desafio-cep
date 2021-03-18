@@ -38,6 +38,7 @@ describe('Class CEP', () => {
       '10000000',
       '00000000',
     ];
+
     // eslint-disable-next-line no-restricted-syntax
     for (const possibleCep of possibleCeps) {
       cep = Cep.possibleNewCep(cep);

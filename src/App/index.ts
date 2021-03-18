@@ -23,6 +23,8 @@ class App extends MainApp {
         },
       },
     });
+    // eslint-disable-next-line global-require
+    await this.server.register({ plugin: require('blipp'), options: { showAuth: true } });
     ExceptionHandlerExtension(this.server);
     await SentryRegister(this.server);
     await LoggerRegister(this.server);

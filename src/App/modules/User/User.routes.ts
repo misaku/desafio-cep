@@ -5,7 +5,9 @@ import UserSchema from './User.schema';
 
 export default (server: Hapi.Server) => {
   const controller = container.resolve(UserController);
+
   server.bind(controller);
+
   server.route([
     {
       method: 'POST',

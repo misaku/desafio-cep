@@ -19,15 +19,18 @@ class CepBusiness implements ICepBusiness {
       let cep = Cep.clearedValue(cepValue);
       let stopGetAddress = false;
       let responseData = {} as IResponseSuccessDTO;
+
       while (!stopGetAddress) {
         if (cep !== '00000000') {
           // eslint-disable-next-line no-await-in-loop
           const cachedResponse = await this.cacheProvider.recover(cep);
+
           if (cachedResponse) {
             return JSON5.parse(cachedResponse);
           }
           // eslint-disable-next-line no-await-in-loop
           const response = await this.service.getAddress(cep);
+
           if (response.success) {
             stopGetAddress = true;
             responseData = response.data as IResponseSuccessDTO;
@@ -39,9 +42,11 @@ class CepBusiness implements ICepBusiness {
           throw new AppError('Não foi possivel encontrar um resultado');
         }
       }
+
       await this.cacheProvider.save(cep, JSON5.stringify(responseData));
       return responseData;
     }
+
     throw new AppError('Cep Inaválido');
   }
 

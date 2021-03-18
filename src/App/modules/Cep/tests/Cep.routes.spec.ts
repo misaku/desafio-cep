@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import MockAdapter from 'axios-mock-adapter';
 import * as JSON5 from 'json5';
 import JWT from 'jsonwebtoken';
@@ -5,9 +6,6 @@ import axios from '@App/api';
 import App from '@App/index';
 
 import '@App/test/Container';
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-require('dotenv').config();
 
 const mock = new MockAdapter(axios);
 const token = JWT.sign(
@@ -33,14 +31,18 @@ const data = {
   ddd: '17',
   siafi: '7097',
 };
+
 mock.onGet(`/${cep}/json/unicode/`).reply(200, data);
+
 jest.mock('../../User/User.repository', () =>
   jest.fn().mockImplementation(() => ({
     findByIdAndEmail: (id: string, email: string) => true,
   })),
 );
+
 const FactoryServer = new App();
 const server = FactoryServer.getServer();
+
 beforeAll(async done => {
   await FactoryServer.start(true);
   done();
@@ -64,6 +66,7 @@ describe('teste route cep', () => {
     expect(response.statusCode).toBe(200);
     expect(JSON5.stringify(JSON5.parse(response.payload))).toBe(JSON5.stringify(data));
   });
+
   it('return 401 status', async () => {
     const options = {
       method: 'GET',
@@ -87,6 +90,7 @@ describe('teste route cep2', () => {
     expect(response.statusCode).toBe(200);
     expect(JSON5.stringify(JSON5.parse(response.payload))).toBe(JSON5.stringify(data));
   });
+
   it('return 401 status', async () => {
     const options = {
       method: 'GET',

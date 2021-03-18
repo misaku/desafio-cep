@@ -1,11 +1,10 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { mock } from 'jest-mock-extended';
 import { Repository } from 'typeorm';
 import App from '@App/index';
 import User from '@DataBase/entity/User';
 
 import '@App/test/Container';
-
-import { hash } from 'bcryptjs';
 
 jest.mock('@DataBase/entity/User', jest.fn());
 
@@ -22,6 +21,7 @@ jest.mock('typeorm', () => {
 
 const FactoryServer = new App();
 const server = FactoryServer.getServer();
+
 beforeAll(async done => {
   await FactoryServer.start(true);
   done();

@@ -31,6 +31,7 @@ describe('UserRepository', () => {
       password: '123',
     });
   });
+
   it('should be find by email', async () => {
     const userRepository = new UserRepository();
     await userRepository.findByEmail('usuario@test.com');
@@ -41,6 +42,7 @@ describe('UserRepository', () => {
       },
     });
   });
+
   it('should be find by id and email', async () => {
     const userRepository = new UserRepository();
     await userRepository.findByIdAndEmail('123', 'usuario@test.com');

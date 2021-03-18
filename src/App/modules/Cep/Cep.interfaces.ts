@@ -7,6 +7,7 @@ export interface IResponseErrorDTO {
 export interface IResponseErrorApiDTO {
   erro: boolean;
 }
+
 export interface IResponseSuccessDTO {
   cep: string;
   logradouro: string;
@@ -19,6 +20,7 @@ export interface IResponseSuccessDTO {
   ddd: string;
   siafi: string;
 }
+
 export interface IResponseDTO {
   success: boolean;
   data: IResponseErrorDTO | IResponseSuccessDTO;

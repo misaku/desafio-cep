@@ -62,6 +62,7 @@ describe('CepBusiness', () => {
     expect(response1.cep).toBe(response2.cep);
     expect(response1.cep).toBe('12345-678');
   });
+
   it('should be able get address method1 in second time', async () => {
     const cepBusiness = new CepBusiness(
       {

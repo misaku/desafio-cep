@@ -1,7 +1,8 @@
 import { Repository } from 'typeorm';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { mock } from 'jest-mock-extended';
-import HealthBusiness from '../Health.business';
 import User from '@DataBase/entity/User';
+import HealthBusiness from '../Health.business';
 
 jest.mock('@DataBase/entity/User', jest.fn());
 

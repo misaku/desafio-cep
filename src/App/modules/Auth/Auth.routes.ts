@@ -6,7 +6,9 @@ import AuthSchema from './Auth.schema';
 
 export default (server: Hapi.Server) => {
   const controller = container.resolve(AuthController);
+
   server.bind(controller);
+
   server.route([
     {
       method: 'POST',

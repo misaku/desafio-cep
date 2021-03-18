@@ -21,6 +21,7 @@ const LoggerRegister = async (server: Hapi.Server) => {
           ],
         }
       : {};
+
     const http = process.env.LOG_HTTP
       ? {
           http: [
@@ -46,6 +47,7 @@ const LoggerRegister = async (server: Hapi.Server) => {
           ],
         }
       : {};
+
     const options = {
       ops: {
         interval: 1000,

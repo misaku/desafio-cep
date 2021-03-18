@@ -5,7 +5,9 @@ import CepController from './Cep.controller';
 
 export default (server: Hapi.Server) => {
   const controller = container.resolve(CepController);
+
   server.bind(controller);
+
   server.route([
     {
       method: 'GET',

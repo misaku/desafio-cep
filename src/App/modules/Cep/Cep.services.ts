@@ -2,6 +2,10 @@ import { AxiosInstance } from 'axios';
 import api from '@App/api';
 import { ICepServices, IResponseDTO, IResponseErrorApiDTO, IResponseSuccessDTO } from './Cep.interfaces';
 
+/**
+ * classe de requisição a api de cep
+ * @class CepServices
+ */
 class CepServices implements ICepServices {
   protected api: AxiosInstance;
 
@@ -9,6 +13,10 @@ class CepServices implements ICepServices {
     this.api = api;
   }
 
+  /**
+   * recupera o dendereço do cep
+   * @param cep
+   */
   public async getAddress(cep: string) {
     try {
       const response = await this.api.get<IResponseErrorApiDTO | IResponseSuccessDTO>(`/${cep}/json/unicode/`);

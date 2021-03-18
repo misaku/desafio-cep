@@ -3,6 +3,10 @@ import { container } from 'tsyringe';
 import CepSchema from './Cep.schema';
 import CepController from './Cep.controller';
 
+/**
+ * rotas de busca de endereço por cep
+ * @param server
+ */
 export default (server: Hapi.Server) => {
   const controller = container.resolve(CepController);
 

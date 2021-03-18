@@ -1,6 +1,9 @@
 import * as JSON5 from 'json5';
 import { ICacheProvider } from '../cache.provider.interfaces';
 
+/**
+ * Classe de cache fake
+ */
 export default class RedisCacheFakeProvider implements ICacheProvider {
   private redis: { key: string; value: string }[];
 

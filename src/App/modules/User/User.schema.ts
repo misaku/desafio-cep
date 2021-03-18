@@ -1,5 +1,8 @@
 import Joi from 'joi';
 
+/**
+ * validação do payload de cadastro de usuário
+ */
 class UserSchema {
   public static store() {
     return {

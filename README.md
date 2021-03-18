@@ -1,8 +1,8 @@
 # BUSCA CEP
 Esse projeto é um desafio nagual deve se expor uma api por busca de cep.
 ## DESAFIO
-- [Ver o texto](./docs_md/DESAFIO.md)
-- [Ver resolução](./docs_md/RESOLUCAO.md)
+- [Ver o texto](https://github.com/misaku/desafio-cep/blob/main/docs_md/DESAFIO.md)
+- [Ver resolução](https://github.com/misaku/desafio-cep/blob/main/docs_md/RESOLUCAO.md)
 
 ## PRIMEIROS PASSOS
 

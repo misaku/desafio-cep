@@ -2,6 +2,11 @@ import * as Hapi from '@hapi/hapi';
 import * as Sentry from '@sentry/node';
 import * as Tracing from '@sentry/tracing';
 
+/**
+ * funcção para registrar sentry
+ * @param server
+ * @constructor
+ */
 const SentryRegister = async (server: Hapi.Server) => {
   Sentry.init({
     dsn: process.env.SENTRY_DNS,

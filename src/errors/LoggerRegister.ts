@@ -1,5 +1,10 @@
 import * as Hapi from '@hapi/hapi';
 
+/**
+ * função para registar Log
+ * @param server
+ * @constructor
+ */
 const LoggerRegister = async (server: Hapi.Server) => {
   if (process.env.LOG && process.env.LOG === 'true') {
     const file = process.env.LOG_PATH_FILE

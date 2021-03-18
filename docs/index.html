@@ -66,7 +66,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="Cep.html">Cep</a></li><li><a href="MainApp.html">MainApp</a></li></ul><h3>Interfaces</h3><ul><li><a href="MainAppInterface.html">MainAppInterface</a></li></ul><h3>Global</h3><ul><li><a href="global.html#autenticateConfig">autenticateConfig</a></li><li><a href="global.html#swaggerConfig">swaggerConfig</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="AppError.html">AppError</a></li><li><a href="AuthSchema.html">AuthSchema</a></li><li><a href="Cep.html">Cep</a></li><li><a href="CepSchema.html">CepSchema</a></li><li><a href="CepServices.html">CepServices</a></li><li><a href="ExceptionHandlerExtension.html">ExceptionHandlerExtension</a></li><li><a href="LoggerRegister.html">LoggerRegister</a></li><li><a href="MainApp.html">MainApp</a></li><li><a href="module.html#.exports">exports</a></li><li><a href="RedisCacheProvider.html">RedisCacheProvider</a></li><li><a href="SentryRegister.html">SentryRegister</a></li><li><a href="User.html">User</a></li><li><a href="UserRepository.html">UserRepository</a></li><li><a href="UserSchema.html">UserSchema</a></li></ul><h3>Interfaces</h3><ul><li><a href="ICacheProvider.html">ICacheProvider</a></li><li><a href="IUserRepository.html">IUserRepository</a></li><li><a href="MainAppInterface.html">MainAppInterface</a></li></ul><h3>Global</h3><ul><li><a href="global.html#api">api</a></li><li><a href="global.html#autenticateConfig">autenticateConfig</a></li><li><a href="global.html#recover">recover</a></li><li><a href="global.html#save">save</a></li><li><a href="global.html#swaggerConfig">swaggerConfig</a></li></ul></div>
                 
             </nav>
         </div>
@@ -100,58 +100,137 @@
 
 
     <section>
-        <article><h1>DESAFIO</h1>
-<h2>1 - Expor um serviço de BUSCA DE CEP</h2>
-<p>Eu, como usuário, quero informar meu CEP e obter o nome da minha
-RUA, BAIRRO, CIDADE e ESTADO para preencher meus dados de cadastro de forma automática.
-Os critérios de aceite dessa história são:</p>
+        <article><h1>BUSCA CEP</h1>
+<p>Esse projeto é um desafio nagual deve se expor uma api por busca de cep.</p>
+<h2>DESAFIO</h2>
 <ul>
-<li>[x] Dado um CEP válido, deve retornar o endereço correspondente</li>
-<li>[x] Dado um CEP válido, que não exista o endereço, deve substituir um dígito da direita para a esquerda por zero até que o endereço seja localizado (Exemplo: Dado 22333999 tentar com 22333990, 22333900 …)</li>
-<li>[x] Dado um CEP inválido, deve retornar uma mensagem reportando o erro: &quot;CEP inválido&quot;
+<li><a href="https://github.com/misaku/desafio-cep/blob/main/docs_md/DESAFIO.md">Ver o texto</a></li>
+<li><a href="https://github.com/misaku/desafio-cep/blob/main/docs_md/RESOLUCAO.md">Ver resolução</a></li>
+</ul>
+<h2>PRIMEIROS PASSOS</h2>
+<h3>DEPENDENCIAS</h3>
+<h4>INSTALAÇÕES</h4>
 <ul>
-<li><em><strong>Há duas maneiras de interpretar um CEP inválido, uma é não segue padrão de formatação de CEP, outra é não foi encontrado dados para o CEP informado, eu considerei com  inválido quaisquer dado diferente das seguintes formatações <code>00.000.000</code>, <code>00.000-000</code>, <code>00.000 000</code>, <code>00000.000</code>, <code>00000-000</code>, <code>00000 000</code>, <code>00000000</code>, ja a segunda opção não considerei como inválido sómente não encontrado.</strong></em></li>
-<li><em><strong>OBS: Consegui visualizar dois algoritimos para solução, um é um algoritimo recursivo e outro através de um loop, particularmente eu prefiro o recursivo pois acho que fica um pouco mais claro, mas acredito que através do loop a aplicação consome menos memoria, como o objetivo deste desafio é mostrar meu conhecimento resolvi fazer as duas resoluções</strong></em></li>
+<li><a href="https://nodejs.org/en/">Instalação NODE JS</a></li>
+<li><a href="https://yarnpkg.com/getting-started/install">Instalação YARN</a></li>
+<li><a href="https://docs.docker.com/engine/install/">Instalação DOCKER</a></li>
+<li><a href="https://docs.docker.com/compose/install/">Instalação DOCKER COMPOSE</a></li>
+</ul>
+<p>projeto feito com padões ES9</p>
+<ul>
+<li>node &gt;= <code>14.16.0</code></li>
+</ul>
+<p>*apesar de ser sugerida a versão 14 que é a versão naqual foi criada, o projeto foi testado nas seguintes versões 10.x,11.x,12.x,13.x,14.x,15.x
+<a href="https://github.com/misaku/desafio-cep/actions/workflows/node.js.yml">pode confirmar acessando a actions do projeto</a></p>
+<h3>MÃO NA MASSA</h3>
+<ul>
+<li>instala as dependendias do projeto rodando o comando:<pre class="prettyprint source lang-BASH"><code>yarn install
+</code></pre>
+</li>
+<li>com as dependencias instaladas, o comando utilizado para subir o banco é:<pre class="prettyprint source lang-BASH"><code>docker-compose up -d
+</code></pre>
+</li>
+<li>após subir o docker, rode o comando:<pre class="prettyprint source lang-BASH"><code>yarn dev:server
+</code></pre>
+</li>
+</ul>
+<h3>RODANDO TESTES</h3>
+<pre class="prettyprint source lang-BASH"><code>  yarn test
+</code></pre>
+<h3>GERANDO DOCUMENTAÇÃO</h3>
+<pre class="prettyprint source lang-BASH"><code>  yarn docs
+</code></pre>
+<h4>SOLUÇÕES PARA ERROS DE COMPILAÇÕES</h4>
+<ul>
+<li>erro de permissão de pasta e arquivo
+<ul>
+<li>atribue as permissões de leitura e gravação a pastas raiz e suas subpastas</li>
 </ul>
 </li>
 </ul>
-<h3>O que se espera para as questões, dicas e direcionamentos:</h3>
-<ul>
-<li>[x] Os serviços devem receber e responder JSON;</li>
-<li>[ ] Faça o uso de Mocks principalmente nos testes;</li>
-<li>[ ] Os dados dos CEPs podem ser &quot;Mocados&quot;;</li>
-<li>[ ] Pense em como documentar os cenários desenvolvidos (Testes sempre são uma boa forma de documentar);</li>
-<li>[ ] Ao finalizar o desenvolvimento você pode compartilhar o código pelo Github ou de outra maneira que preferir (como arquivo compactado). Se possível, em caso de arquivo compactado, envie o mesmo para um virtual drive e compartilha o link na prova;</li>
-<li>[ ] Fique a vontade para entrar em contato e tirar dúvidas;</li>
-<li>[ ] Juntamente com o Código, deve-se documentar a estratégia utilizada para a criação da aplicação, a arquitetura utilizada e os padrões. A documentação pode ser feita via GIT/Bitbucket ou adicionado no HackerRank. Isto faz parte da avaliação da prova.</li>
-<li>[ ] Em caso de uso do Git/Bitbucket não esqueça de criar o .gitignore.</li>
-</ul>
-<h3>Extras:</h3>
-<ul>
-<li>[x] preferencialmente use um versionador e faça commits granulares;</li>
-<li>[ ] api com autorização;</li>
-<li>[ ] boas práticas de design de api;</li>
-<li>[x] swagger com a documentação;</li>
-<li>[x] tecnologias preferenciais: java ou node.js - justifique, no readme a escolha da tecnologia.
-<ul>
-<li><em><strong>Foi adotado <code>node.js</code>, é uma tecnologia que tenho mais familiaridade e também é a stack forte da squad.</strong></em></li>
-</ul>
-</li>
-</ul>
-<h3>Extras plus plus master (não é mandatório, apenas diferencial se vc tiver tempo e conhecimento):</h3>
-<ul>
-<li>[ ] logs estruturados;</li>
-<li>[ ] endpoint para saúde da aplicação;</li>
-<li>[ ] endpoint para métricas da aplicação;</li>
-<li>[ ] considere a performance do algoritmo e o tempo de resposta da aplicação, sabendo que a API  pode receber flutuações de tráfego agressivas.</li>
-</ul>
-<h2>2 - Quando você digita a URL de um site (http://www.netshoes.com.br) no browser e pressiona enter, explique da forma que preferir, o que ocorre nesse processo do protocolo HTTP entre o Client e o Server.</h2>
-<p>O que espera-se como resposta - Dicas e direcionamentos:</p>
-<ul>
-<li>Detalhe sua linha de raciocínio;</li>
-<li>Elabore um plano de entendimento, por exemplo, lista, de forma a elencar os passos;</li>
-<li>Não copie conteúdo da internet, responda com suas palavras.</li>
-</ul></article>
+<p>*listando esse erro pois ja tive em outro projetos quando abria em outras maquinas, então acho que pode ser algo que possa acontecer.</p>
+<h2>ROTAS</h2>
+<table>
+<thead>
+<tr>
+<th>TYPE</th>
+<th>PATH</th>
+<th>PAYLOAD</th>
+<th>AUTH</th>
+<th>DESCRIÇÃO</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>POST</td>
+<td>/auth</td>
+<td><code>{email:'',password:''}</code></td>
+<td>-</td>
+<td>Endpoint de Autenticação, retorna token JWT</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/cep/:cepVaue</td>
+<td>-</td>
+<td>JWT</td>
+<td>Endpoint de busca de endereço com algoritimo de loop</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/cep2/:cepVaue</td>
+<td>-</td>
+<td>JWT</td>
+<td>Endpoint de busca de endereço com algoritimo de recursão</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/doc</td>
+<td>-</td>
+<td>-</td>
+<td>Documentação swagger da aplicação</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/health</td>
+<td>-</td>
+<td>-</td>
+<td>Endpoint de verificação healthcheck</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/status</td>
+<td>-</td>
+<td>-</td>
+<td>Endpoint de metricas em realtime da aplicação</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/swagger.json</td>
+<td>-</td>
+<td>-</td>
+<td>json do swagger pode ser usado para configurar o postman ou o insomnia</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>/user</td>
+<td>-</td>
+<td>-</td>
+<td>Endpoint de Criação de Usuário</td>
+</tr>
+</tbody>
+</table>
+<h2>COMO TESTAR</h2>
+<h3>VIA SWAGGER</h3>
+<ol>
+<li>Entrar na rota <code>/doc</code></li>
+<li>Acessar todos os metodos, somente /auth, /health e /user Funcionará sem autenticação</li>
+<li>Criar usuário</li>
+<li>Logar com usuário e pegar token e adicionar no campo authorize que está no canto superior direito</li>
+<li>testar rotas</li>
+</ol>
+<h3>VIA CLIENTE</h3>
+<p>Pode importar as rotas no seu cliente através da url do json do swagger
+Repetir os passos de 2 ao 5 no cliente escolhido</p></article>
     </section>
 
 

@@ -1,5 +1,9 @@
 import { container } from 'tsyringe';
 
+/**
+ * DOCUMENTO DE IMPORTAÇÃO DE INGECAO DE DEPENDENDCIAS
+ */
+
 import { IUserBusiness, IUserRepository } from '@modules/User/User.interfaces';
 import { IAuthBusiness } from '@modules/Auth/Auth.interfaces';
 import { ICepBusiness, ICepServices } from '@modules/Cep/Cep.interfaces';

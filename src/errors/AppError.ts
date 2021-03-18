@@ -1,3 +1,7 @@
+/**
+ * Classe customizada de erro
+ * @class AppError
+ */
 export default class AppError extends Error {
   public readonly message: string;
 

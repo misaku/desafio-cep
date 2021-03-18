@@ -2,6 +2,11 @@ import * as Hapi from '@hapi/hapi';
 
 import AppError from './AppError';
 
+/**
+ * função para tratar excessão e erros na aplicação
+ * @param server
+ * @constructor
+ */
 function ExceptionHandlerExtension(server: Hapi.Server): void {
   server.ext('onPreResponse', function (request, h) {
     const response = request.response as any;

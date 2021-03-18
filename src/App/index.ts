@@ -38,10 +38,16 @@ class App extends MainApp {
 
   async routes() {
     await super.routes();
-    // REGEX DE TESTE PARA ARQUIVOS QUE TRMINA COM ROUTE OU ROUTES
+    /**
+     *  REGEX DE TESTE PARA ARQUIVOS QUE TERMINA COM ROUTES
+     * @param fileName nome do arquivo
+     */
     const isRouteFile = (fileName: string) => /(routes)\.ts$/.test(fileName.toLowerCase());
 
-    // FUNÇÃO DE NAVEGAÇÃO DE PASTAR E VERIFICAÇÃO DE RESPEITO A CONDIÇÃO DO REGEX
+    /**
+     * FUNÇÃO DE NAVEGAÇÃO DE PASTAR E VERIFICAÇÃO DE RESPEITO A CONDIÇÃO DO REGEX
+     * @param dirname nome do diretorio ou arquivo
+     */
     const getRoutesFilesFromDirname = (dirname: string) =>
       (dir.files(dirname, { sync: true }) || []).filter(isRouteFile);
 

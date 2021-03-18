@@ -4,6 +4,10 @@ import { container } from 'tsyringe';
 import AuthController from './Auth.controller';
 import AuthSchema from './Auth.schema';
 
+/**
+ * rota de login
+ * @param server
+ */
 export default (server: Hapi.Server) => {
   const controller = container.resolve(AuthController);
 

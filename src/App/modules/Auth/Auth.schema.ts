@@ -1,5 +1,8 @@
 import Joi from 'joi';
 
+/**
+ * validação do payload de login
+ */
 class AuthSchema {
   public static store() {
     return {

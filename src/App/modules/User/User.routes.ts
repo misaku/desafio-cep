@@ -3,6 +3,10 @@ import { container } from 'tsyringe';
 import UserController from './User.controller';
 import UserSchema from './User.schema';
 
+/**
+ * Arquivo de rotas de usuário
+ * @param server
+ */
 export default (server: Hapi.Server) => {
   const controller = container.resolve(UserController);
 

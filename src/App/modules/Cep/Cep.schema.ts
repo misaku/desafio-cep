@@ -1,5 +1,8 @@
 import Joi from 'joi';
 
+/**
+ * validação dos parametros da rota de cep
+ */
 class CepSchema {
   public static show() {
     return {

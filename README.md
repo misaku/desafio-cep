@@ -41,6 +41,15 @@ projeto feito com padões ES9
 ```BASH
   yarn docs
 ```
+### GERANDO BUILD
+```BASH
+  yarn build
+```
+### RODANDO RELEASE AUTOMATICO
+obs. é preciso configurar o token do github para subir versão
+```BASH
+  yarn release-it
+```
 
 #### SOLUÇÕES PARA ERROS DE COMPILAÇÕES
 

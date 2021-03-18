@@ -1,8 +1,8 @@
 # BUSCA CEP
 Esse projeto é um desafio nagual deve se expor uma api por busca de cep.
 ## DESAFIO
-[Ver o texto](DOC/DESAFIO.md)
-[Ver resolução](DOC/RESOLUCAO.md)
+- [Ver o texto](./docs_md/DESAFIO.md)
+- [Ver resolução](./docs_md/RESOLUCAO.md)
 
 ## PRIMEIROS PASSOS
 

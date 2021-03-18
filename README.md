@@ -69,7 +69,7 @@ obs. é preciso configurar o token do github para subir versão
 |GET| /health | - | - | Endpoint de verificação healthcheck |
 |GET| /status | - | - | Endpoint de metricas em realtime da aplicação |
 |GET| /swagger.json  | - | - | json do swagger pode ser usado para configurar o postman ou o insomnia |
-|POST| /user  | - | - | Endpoint de Criação de Usuário |
+|POST| /user  | `{name:'',email:'',password:''}` | - | Endpoint de Criação de Usuário |
 
 ## COMO TESTAR
 ### VIA SWAGGER

@@ -1,3 +1,117 @@
+# BUSCA CEP
+Esse projeto é um desafio nagual deve se expor uma api por busca de cep.
+## DESAFIO
+[Ver o texto](DOC/DESAFIO.md)
+
+## PRIMEIROS PASSOS
+
+### DEPENDENCIAS
+
+#### INSTALAÇÕES
+- [Instalação NODE JS](https://nodejs.org/en/)
+- [Instalação YARN](https://yarnpkg.com/getting-started/install)
+- [Instalação DOCKER](https://docs.docker.com/engine/install/)
+- [Instalação DOCKER COMPOSE](https://docs.docker.com/compose/install/)
+
+projeto feito com padões ES9
+- node >= `14.16.0`
+
+*apesar de ser sugerida a versão 14 que é a versão naqual foi criada, o projeto foi testado nas seguintes versões 10.x,11.x,12.x,13.x,14.x,15.x
+[pode confirmar acessando a actions do projeto](https://github.com/misaku/desafio-cep/actions/workflows/node.js.yml)
+
+### MÃO NA MASSA
+* instala as dependendias do projeto rodando o comando:
+  ```BASH
+  yarn install
+  ```
+* com as dependencias instaladas, o comando utilizado para subir o banco é:
+  ```BASH
+  docker-compose up -d
+  ```
+* após subir o docker, rode o comando:
+  ```BASH
+  yarn dev:server
+  ```
+### RODANDO TESTES
+```BASH
+  yarn test
+```
+### GERANDO DOCUMENTAÇÃO
+```BASH
+  yarn docs
+```
+
+#### SOLUÇÕES PARA ERROS DE COMPILAÇÕES
+
+- erro de permissão de pasta e arquivo
+    - atribue as permissões de leitura e gravação a pastas raiz e suas subpastas
+
+*listando esse erro pois ja tive em outro projetos quando abria em outras maquinas, então acho que pode ser algo que possa acontecer.
+## Rotas
+
+| TYPE | PATH | ARGS | QUERY | PARAMS | DESCRIÇÃO |
+|------|------|------|-------|--------|-----------|
+|GET| / | - | - | - | Retorna status do servidor |
+|GET| /auth/token | - | - | - | retorna token da aplicação |
+|GET| /games | - | - | - | lista todos objetos |
+|GET| /games?players= | - | players: `joão,josé` | - | Filtra por players |
+|GET| /games/:key | KeyGame | - | - | Seleciona jogo especifico |
+| - | /doc | - | - | - | Documentação swagger da aplicação |
+
+## Como testar
+### Via swagger
+1. Entrar na tora `/doc`
+2. Acessar todos os metodos, somente o de Auth e o de Health Funcionará sem autenticação
+3. Pegar token e adicionar no campo authorize que está no canto superior direito
+4. testar rotas de game
+### Via Cliente
+Repetir os passos de 2 e 4 no cliente escolgido, no caso passo 3 colocar autenticação no cliente escolhido
+## Estrutura do projeto
+A estrutura do projeto foi pensada para trabalhar com modularização de componentes.
+
+Cada módulo tem sua responsabilidade sua rota e sua regra de negócio. Os arquivos de configuração de padronização do projeto ficam fora da pasta `src` e o core da aplicação ficam na pasta `App`
+
+
+
+
+
+
+# COMMITS PADRONIZADOS
+
+### PADRÃO:
+```
+<TIPO>(SCOPO):<ASSUNTO>
+```
+### TIPOS:
+
+**NOME** | **DESCRICAO** |
+------|-----------
+**feat** | *Um novo recurso*
+**fix** | *Uma correção de bug*
+**docs** | *Alterações apenas na documentação*
+**style** | *Mudanças que não afetam o significado do código (espaço em branco, formatação, ponto e vírgula ausente, etc)*
+**refactor** | *Uma alteração de código que não corrige um bug nem adiciona um recurso*
+**test** | *Adicionar testes ausentes ou corrigir os existentes*
+**chore** | *Mudanças no processo de construção ou ferramentas e bibliotecas auxiliares, como geração de documentação*
+**perf** | *Uma alteração de código que melhora o desempenho*
+**ci** | *Mudanças em seus scripts e arquivos de configuração de CI*
+**build** | *Mudanças que afetam o sistema de compilação ou dependências externas (escopos de exemplo: gulp, broccoli, npm)*
+**revert** | *commit usado quando volta para um commit anterior*
+
+### ESCOPO:
+Opcional, pode ser qualquer coisa especificando o escopo da mudança de confirmação.\
+Por exemplo $location, $browser, $compile, $rootScope, ngHref, ngClick, ngView, etc.\
+No desenvolvimento de aplicativos, o escopo pode ser uma página, um módulo ou um componente.
+
+### ASSUNTO:
+Breve resumo da mudança no tempo presente. Sem letras maiúsculas. Sem ponto final no final
+
+### EXEMPLO:
+```BASH
+git commit -m "chore(separation): add list"
+```
+
+
 # RESPODER QUESATO 2
 cliente faz a requisição via http
 - um serviço de dns vai garantir que seja enviada a requisição para o servidor certo
@@ -13,51 +127,6 @@ cliente faz a requisição via http
 - OBS: Consegui visualizar dois algoritimos para solução, um é um algoritimo recursivo e outro através de um loop, particularmente eu prefiro o recursivo pois acho que fica um pouco mais claro, mas acredito que através do loop a aplicação consome menos memoria, como o objetivo deste desafio é mostrar meu conhecimento resolvi fazer as duas resoluções
 - Foi adotado `node.js`, é uma tecnologia que tenho mais familiaridade e também é a stack forte da squad.
 
-# DESAFIO
-
-### 1 - API
-
-Expor um serviço de BUSCA DE CEP
-Eu, como usuário, quero informar meu CEP e obter o nome da minha
-RUA, BAIRRO, CIDADE e ESTADO para preencher meus dados de cadastro de forma automática.
-Os critérios de aceite dessa história são:
-- [x] Dado um CEP válido, deve retornar o endereço correspondente
-- [x] Dado um CEP válido, que não exista o endereço, deve substituir um dígito da direita para a esquerda por zero até que o endereço seja localizado (Exemplo: Dado 22333999 tentar com 22333990, 22333900 …)
-- [x] Dado um CEP inválido, deve retornar uma mensagem reportando o erro: "CEP inválido"
-
-#### O que se espera para as questões, dicas e direcionamentos:
-
-- [x] Os serviços devem receber e responder JSON;
-- [x] Faça o uso de Mocks principalmente nos testes;
-- [x] Os dados dos CEPs podem ser "Mocados";
-- [X] Pense em como documentar os cenários desenvolvidos (Testes sempre são uma boa forma de documentar);
-- [x] Ao finalizar o desenvolvimento você pode compartilhar o código pelo Github ou de outra maneira que preferir (como arquivo compactado). Se possível, em caso de arquivo compactado, envie o mesmo para um virtual drive e compartilha o link na prova;
-- [x] Fique a vontade para entrar em contato e tirar dúvidas;
-- [x] Juntamente com o Código, deve-se documentar a estratégia utilizada para a criação da aplicação, a arquitetura utilizada e os padrões. A documentação pode ser feita via GIT/Bitbucket ou adicionado no HackerRank. Isto faz parte da avaliação da prova.
-- [x] Em caso de uso do Git/Bitbucket não esqueça de criar o .gitignore.
-
-#### Extras:
-
-- [x] preferencialmente use um versionador e faça commits granulares;
-- [x] api com autorização;
-- [x] boas práticas de design de api;
-- [x] swagger com a documentação;
-- [x] tecnologias preferenciais: java ou node.js - justifique, no readme a escolha da tecnologia.
-
-#### Extras plus plus master (não é mandatório, apenas diferencial se vc tiver tempo e conhecimento):
-- [x] logs estruturados;
-- [x] endpoint para saúde da aplicação;
-- [x] endpoint para métricas da aplicação;
-- [x] considere a performance do algoritmo e o tempo de resposta da aplicação, sabendo que a API  pode receber flutuações de tráfego agressivas.
-
-
-### 2 - Questão
-
-Quando você digita a URL de um site (http://www.netshoes.com.br) no browser e pressiona enter, explique da forma que preferir, o que ocorre nesse processo do protocolo HTTP entre o Client e o Server.
-O que espera-se como resposta - Dicas e direcionamentos:
-- Detalhe sua linha de raciocínio;
-- Elabore um plano de entendimento, por exemplo, lista, de forma a elencar os passos;
-- Não copie conteúdo da internet, responda com suas palavras.
 
 
 

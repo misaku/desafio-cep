@@ -6,6 +6,7 @@ import axios from '@App/api';
 import App from '@App/index';
 
 import '@App/test/Container';
+import EnvironmentConfig from '../../../../Environment.config';
 
 const mock = new MockAdapter(axios);
 const token = JWT.sign(
@@ -15,7 +16,7 @@ const token = JWT.sign(
     email: 'usuario@teste.com',
   },
   // ts-ignore
-  process.env.APP_SECRET || '',
+  EnvironmentConfig.sever.secret as string,
 );
 
 const cep = '14050360';
@@ -34,7 +35,7 @@ const data = {
 
 mock.onGet(`/${cep}/json/unicode/`).reply(200, data);
 
-jest.mock('../../User/User.repository', () =>
+jest.mock('@modules/User/User.repository', () =>
   jest.fn().mockImplementation(() => ({
     findByIdAndEmail: (id: string, email: string) => true,
   })),

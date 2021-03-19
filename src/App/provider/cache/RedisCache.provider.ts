@@ -1,4 +1,5 @@
 import Redis, { Redis as RedisClient } from 'ioredis';
+import EnvironmentConfig from '@src/Environment.config';
 import { ICacheProvider } from './cache.provider.interfaces';
 
 /**
@@ -9,13 +10,16 @@ export default class RedisCacheProvider implements ICacheProvider {
   private redis: RedisClient;
 
   constructor() {
-    this.redis = new Redis({
-      port: (process.env.REDIS_PORT && Number(process.env.REDIS_PORT)) || undefined, // Redis port
-      host: process.env.REDIS_HOST || undefined, // Redis host
-      family: (process.env.REDIS_FAMILY && Number(process.env.REDIS_FAMILY)) || undefined, // 4 (IPv4) or 6 (IPv6)
-      password: process.env.REDIS_PASSWORD || undefined,
-      db: process.env.REDIS_NUMBER || undefined,
-    } as any);
+    if (EnvironmentConfig.cache.active) {
+      const { family, host, number, password, port } = EnvironmentConfig.cache.redis;
+      this.redis = new Redis({
+        port, // Redis port
+        host, // Redis host
+        family, // 4 (IPv4) or 6 (IPv6)
+        password,
+        db: number,
+      } as any);
+    }
   }
 
   /**
@@ -23,6 +27,9 @@ export default class RedisCacheProvider implements ICacheProvider {
    * @param key chave do dado
    */
   async recover(key: string): Promise<string | null> {
+    if (!EnvironmentConfig.cache.active) {
+      return null;
+    }
     return this.redis.get(key);
   }
 
@@ -32,6 +39,9 @@ export default class RedisCacheProvider implements ICacheProvider {
    * @param value dado em texto
    */
   async save(key: string, value: string): Promise<void> {
+    if (!EnvironmentConfig.cache.active) {
+      return;
+    }
     await this.redis.set(key, value, 'ex', 60 * 60);
   }
 }

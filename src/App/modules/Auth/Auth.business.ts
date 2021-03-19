@@ -5,6 +5,7 @@ import { inject, injectable } from 'tsyringe';
 import AppError from '@errors/AppError';
 
 import { IUserRepository } from '@modules/User/User.interfaces';
+import EnvironmentConfig from '@src/Environment.config';
 import { IAuthBusiness, IAuthRequestDTO, IAuthResponseDTO } from './Auth.interfaces';
 
 @injectable()
@@ -33,7 +34,7 @@ class AuthBusiness implements IAuthBusiness {
         name: user.name,
         email: user.email,
       },
-      process.env.APP_SECRET || '',
+      EnvironmentConfig.sever.secret as string,
     );
 
     return {

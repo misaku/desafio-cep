@@ -1,4 +1,5 @@
 import * as Hapi from '@hapi/hapi';
+import { EnvironmentConfig } from '@src/Environment.config';
 import MainAppInterface from './MainApp.interface';
 
 /**
@@ -15,8 +16,8 @@ abstract class MainApp implements MainAppInterface {
     });
 
     this.server = Hapi.server({
-      port: process.env.SERVER_PORT,
-      host: process.env.SERVER_HOST,
+      port: EnvironmentConfig.sever.port,
+      host: EnvironmentConfig.sever.host,
     });
   }
 

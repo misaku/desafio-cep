@@ -8,7 +8,7 @@ function setEnvironment<T = any>(value: any, defaultValue?: T): T | undefined {
   } else {
     parsedValue = value as T;
   }
- console.log(value ? parsedValue : defaultValue)
+
   return value ? parsedValue : defaultValue;
 }
 

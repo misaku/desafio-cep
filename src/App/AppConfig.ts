@@ -3,6 +3,7 @@ import Vision from '@hapi/vision';
 import HapiSwagger from 'hapi-swagger';
 import * as Hapi from '@hapi/hapi';
 import UserRepository from '@modules/User/User.repository';
+import EnvironmentConfig from '@src/Environment.config';
 
 /**
  * Configuração do swagger
@@ -49,7 +50,7 @@ export const autenticateConfig = (server: Hapi.Server) => {
   };
 
   server.auth.strategy('jwt', 'jwt', {
-    key: process.env.APP_SECRET,
+    key: EnvironmentConfig.sever.secret,
     validate,
     verifyOptions: { ignoreExpiration: true },
   });

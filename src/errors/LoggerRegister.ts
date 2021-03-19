@@ -1,4 +1,5 @@
 import * as Hapi from '@hapi/hapi';
+import EnvironmentConfig from '@src/Environment.config';
 
 /**
  * função para registar Log
@@ -6,8 +7,13 @@ import * as Hapi from '@hapi/hapi';
  * @constructor
  */
 const LoggerRegister = async (server: Hapi.Server) => {
-  if (process.env.LOG && process.env.LOG === 'true') {
-    const file = process.env.LOG_PATH_FILE
+  const {
+    active,
+    http: { key, url, value },
+    path,
+  } = EnvironmentConfig.log;
+  if (active) {
+    const file = path
       ? {
           file: [
             {
@@ -21,13 +27,13 @@ const LoggerRegister = async (server: Hapi.Server) => {
             },
             {
               module: 'good-file',
-              args: [process.env.LOG_PATH_FILE],
+              args: [path],
             },
           ],
         }
       : {};
 
-    const http = process.env.LOG_HTTP
+    const http = url
       ? {
           http: [
             {
@@ -38,12 +44,12 @@ const LoggerRegister = async (server: Hapi.Server) => {
             {
               module: 'good-http',
               args: [
-                process.env.LOG_HTTP,
+                url,
                 {
                   wreck: {
-                    ...(process.env.LOG_HTTP_KEY &&
-                      process.env.LOG_HTTP_VALUE && {
-                        headers: { [process.env.LOG_HTTP_KEY]: process.env.LOG_HTTP_VALUE },
+                    ...(key &&
+                      value && {
+                        headers: { [key]: value },
                       }),
                   },
                 },

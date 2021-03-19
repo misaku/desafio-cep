@@ -1,14 +1,16 @@
 import { createConnection } from 'typeorm';
+import EnvironmentConfig from '@src/Environment.config';
 
 export default async (execute: () => void) => {
+  const { dbName, host, password, port, type, user } = EnvironmentConfig.database;
   try {
     await createConnection({
-      type: process.env.DB_TYPE,
-      host: process.env.DB_HOST,
-      port: process.env.DB_PORT,
-      username: process.env.DB_USER,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_NAME,
+      type,
+      host,
+      port,
+      username: user,
+      password,
+      database: dbName,
       synchronize: true,
       logging: false,
       entities: ['./src/DataBase/entity/**/*{.ts,.js}'],

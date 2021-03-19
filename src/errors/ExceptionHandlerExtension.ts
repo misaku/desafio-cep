@@ -14,7 +14,7 @@ function ExceptionHandlerExtension(server: Hapi.Server): void {
     if (response instanceof Error && response.name === 'AppError') {
       const { statusCode, message } = response as AppError;
 
-      const sentry = (server as any).plugins['hapi-sentry']?.client;
+      const sentry = (server as any)?.plugins['hapi-sentry']?.client;
 
       if (sentry) {
         sentry.captureException(response);

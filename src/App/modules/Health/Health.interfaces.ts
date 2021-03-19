@@ -5,6 +5,9 @@ export interface IHealthBusinessReponseDTO {
   database: {
     status: 'OK' | 'ERROR';
   };
+  redis: {
+    status: 'OK' | 'ERROR';
+  };
 }
 
 export interface IHealthBusiness {

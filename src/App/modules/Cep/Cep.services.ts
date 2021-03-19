@@ -20,15 +20,16 @@ class CepServices implements ICepServices {
   public async getAddress(cep: string) {
     try {
       const response = await this.api.get<IResponseErrorApiDTO | IResponseSuccessDTO>(`/${cep}/json/unicode/`);
-      if (response.status === 200) {
-        if (!(response.data as IResponseErrorApiDTO).erro) {
-          return {
-            success: true,
-            data: response.data,
-          } as IResponseDTO;
-        }
+      if (!(response.data as IResponseErrorApiDTO).erro) {
+        return {
+          success: true,
+          data: response.data,
+        } as IResponseDTO;
       }
     } catch (e) {
+      if (e.response.status !== 400) {
+        throw e;
+      }
       return {
         success: false,
         data: {

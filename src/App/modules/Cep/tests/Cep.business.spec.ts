@@ -116,8 +116,6 @@ describe('CepBusiness', () => {
     mockValid = false;
     const cepBusiness = new CepBusiness(
       {
-        isValid: (data: any) => false,
-        clearedValue: (data: any) => data,
         getAddress: async data =>
           ({
             success: data === '14050300',
@@ -128,5 +126,19 @@ describe('CepBusiness', () => {
 
     await expect(cepBusiness.getAddress('00000000')).rejects.toBeInstanceOf(Error);
     await expect(cepBusiness.getAddress2('00000000')).rejects.toBeInstanceOf(Error);
+  });
+  it('should not be able get address with Error in request', async () => {
+    mockValid = true;
+    const cepBusiness = new CepBusiness(
+      {
+        getAddress: async data => {
+          throw new Error('teste');
+        },
+      } as ICepServices,
+      new RedisCacheFakeProvider(),
+    );
+
+    await expect(cepBusiness.getAddress('87654321')).rejects.toBeInstanceOf(Error);
+    await expect(cepBusiness.getAddress2('98765432')).rejects.toBeInstanceOf(Error);
   });
 });

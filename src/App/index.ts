@@ -42,7 +42,7 @@ class App extends MainApp {
      *  REGEX DE TESTE PARA ARQUIVOS QUE TERMINA COM ROUTES
      * @param fileName nome do arquivo
      */
-    const isRouteFile = (fileName: string) => /(routes)\.ts$/.test(fileName.toLowerCase());
+    const isRouteFile = (fileName: string) => /(routes)\.[tj]s$/.test(fileName.toLowerCase());
 
     /**
      * FUNÇÃO DE NAVEGAÇÃO DE PASTAR E VERIFICAÇÃO DE RESPEITO A CONDIÇÃO DO REGEX

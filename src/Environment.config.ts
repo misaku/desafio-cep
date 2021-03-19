@@ -1,14 +1,14 @@
 function setEnvironment<T = any>(value: any, defaultValue?: T): T | undefined {
   let parsedValue: T | undefined;
 
-  if (value.toString().toUpperCase() === 'TRUE' || value.toString().toUpperCase() === 'FALSE') {
+  if (value && (value.toString().toUpperCase() === 'TRUE' || value.toString().toUpperCase() === 'FALSE')) {
     parsedValue = (((value as string).toUpperCase() === 'TRUE') as unknown) as T;
-  } else if (Number(value).toString().toUpperCase() !== 'NAN' && value !== '') {
+  } else if (value && Number(value).toString().toUpperCase() !== 'NAN') {
     parsedValue = (Number(value) as unknown) as T;
   } else {
     parsedValue = value as T;
   }
-
+ console.log(value ? parsedValue : defaultValue)
   return value ? parsedValue : defaultValue;
 }
 

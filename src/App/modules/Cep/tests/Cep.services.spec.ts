@@ -52,4 +52,19 @@ describe('CepServices', () => {
       'Houve um erro na requisição tente novamente mais tarde!',
     );
   });
+
+  it('should be erro when have not faound', async () => {
+    const cep = '123456';
+    const data = {
+      erro: 'Não encontrado',
+    };
+    mock.onGet(`/${cep}/json/unicode/`).reply(404, data);
+    const cepService = new CepServices();
+    try {
+      await cepService.getAddress(cep);
+    } catch (e) {
+      expect(e.response.status).toBe(404);
+      expect(e.response.data.erro).toBe('Não encontrado');
+    }
+  });
 });

@@ -1,6 +1,6 @@
 {
     "name": "desafio-cep",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "main": "index.js",
     "repository": "git@github.com:misaku/desafio-cep.git",
     "author": "Michel dos Santos Kuguio <michel.kuguio@gmail.com>",
